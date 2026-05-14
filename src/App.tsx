@@ -7,6 +7,7 @@ import Error404 from "./components/pages/Error404"
 import Login from "./components/pages/Login"
 import Administrador from "./components/pages/Administrador"
 import FormularioProducto from "./components/pages/FormularioProducto"
+import Nosotros from "./components/pages/Nosotros"
 import { BrowserRouter, Routes, Route } from "react-router"
 
 
@@ -24,6 +25,7 @@ function App() {
         <Route path="/administrador/crear" element={<FormularioProducto/>}></Route>
         <Route path="/carrito" element={<Carrito/>}></Route>
         <Route path="/login" element={<Login/>}></Route>
+        <Route path="/nosotros" element={<Nosotros/>}></Route>
         <Route path="*" element={<Error404/>}></Route>
 
 
