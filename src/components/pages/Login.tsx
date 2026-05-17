@@ -76,6 +76,23 @@ const Login = () => {
                   </button>
                 </div>
               </div>
+              <div className="text-right">
+
+                <a
+                  href="#"
+                  className="text-sm text-green-500 hover:underline"
+                >
+                  ¿Olvidaste tu contraseña?
+                </a>
+
+              </div>
+
+              <button
+                className="w-full bg-green-600 hover:bg-green-500 text-white font-semibold py-4 rounded-xl transition-all shadow-lg shadow-green-500/20"
+              >
+                Iniciar sesión
+              </button>
+
             </form>
           </div>
         </div>
