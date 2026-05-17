@@ -25,6 +25,39 @@ const Login = () => {
             <p className="text-gray-400 text-center mb-10">
               Ingresa tus credenciales para continuar
             </p>
+
+            <form className="space-y-6">
+              <div>
+                <label className="block text-sm text-gray-300 mb-2">
+                  Usuario
+                </label>
+
+                <div className="relative">
+                  <FaUser className="absolute left-4 top-1/2 -translate-y-1/2 text-green-500" />
+
+                  <input
+                    type="text"
+                    placeholder="Ingresa tu usuario"
+                    className="w-full bg-black border border-gray-800 rounded-xl py-4 pl-12 pr-4 text-white outline-none focus:border-green-500 transition-all"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-sm text-gray-300 mb-2">
+                  Contraseña
+                </label>
+
+                <div className="relative">
+                  <FaLock className="absolute left-4 top-1/2 -translate-y-1/2 text-green-500" />
+
+                  <input
+                    placeholder="Ingresa tu contraseña"
+                    className="w-full bg-black border border-gray-800 rounded-xl py-4 pl-12 pr-14 text-white outline-none focus:border-green-500 transition-all"
+                  />
+                </div>
+              </div>
+            </form>
           </div>
         </div>
       </div>
