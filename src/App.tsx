@@ -9,6 +9,7 @@ import Administrador from "./components/pages/Administrador"
 import FormularioProducto from "./components/pages/FormularioProducto"
 import Nosotros from "./components/pages/Nosotros"
 import { BrowserRouter, Routes, Route } from "react-router"
+import ProtectorRutas from "./components/routes/ProtectorRutas"
 
 
 
@@ -21,8 +22,11 @@ function App() {
     <Routes>
         <Route path="/" element={<Inicio/>}></Route>
         <Route path="/catalogo" element={<Catalogo/>}></Route>
-        <Route path="/administrador" element={<Administrador/>}></Route>
-        <Route path="/administrador/crear" element={<FormularioProducto/>}></Route>
+        <Route path="/administrador" element={<ProtectorRutas/>}>
+          <Route index element={<Administrador/>}></Route>
+          <Route path="crear" element={<FormularioProducto titulo={'Crear Servicio'}></FormularioProducto>}/>
+          <Route path="editar/:id" element={<FormularioProducto titulo={'Editar Servicio'}></FormularioProducto>}/>
+        </Route>
         <Route path="/carrito" element={<Carrito/>}></Route>
         <Route path="/login" element={<Login/>}></Route>
         <Route path="/nosotros" element={<Nosotros/>}></Route>
