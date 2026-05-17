@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { type ProductoFormData } from "../../interfaces/productos";
-import Swal from "sweetalert2";
+
 
 const FormularioProducto = () => {
   // 1. PRIMERO inicializamos el useForm para que esté disponible en todo el componente
