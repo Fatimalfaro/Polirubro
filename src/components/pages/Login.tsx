@@ -3,7 +3,7 @@ import { FaEye, FaEyeSlash, FaLock, FaUser } from "react-icons/fa";
 import { useState } from "react";
 
 const Login = () => {
-    const [mostrarPassword, setMostrarPassword] = useState(false);
+  const [mostrarPassword, setMostrarPassword] = useState(false);
   return (
     <section className="min-h-screen bg-black flex items-center justify-center px-4 py-10">
       <div className="w-full max-w-7xl bg-[#0d0d0d] border border-green-500/10 rounded-3xl overflow-hidden shadow-2xl grid lg:grid-cols-2">
@@ -54,45 +54,29 @@ const Login = () => {
                   <FaLock className="absolute left-4 top-1/2 -translate-y-1/2 text-green-500" />
 
                   <input
-                   type={mostrarPassword ? "text" : "password"}
+                    type={mostrarPassword ? "text" : "password"}
                     placeholder="Ingresa tu contraseña"
                     className="w-full bg-black border border-gray-800 rounded-xl py-4 pl-12 pr-14 text-white outline-none focus:border-green-500 transition-all"
                   />
 
                   <button
                     type="button"
-                    onClick={() =>
-                      setMostrarPassword(!mostrarPassword)
-                    }
+                    onClick={() => setMostrarPassword(!mostrarPassword)}
                     className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-green-500 transition-all"
                   >
-
-                    {mostrarPassword ? (
-                      <FaEyeSlash />
-                    ) : (
-                      <FaEye />
-                    )}
-
+                    {mostrarPassword ? <FaEyeSlash /> : <FaEye />}
                   </button>
                 </div>
               </div>
               <div className="text-right">
-
-                <a
-                  href="#"
-                  className="text-sm text-green-500 hover:underline"
-                >
+                <a href="#" className="text-sm text-green-500 hover:underline">
                   ¿Olvidaste tu contraseña?
                 </a>
-
               </div>
 
-              <button
-                className="w-full bg-green-600 hover:bg-green-500 text-white font-semibold py-4 rounded-xl transition-all shadow-lg shadow-green-500/20"
-              >
+              <button className="w-full bg-green-600 hover:bg-green-500 text-white font-semibold py-4 rounded-xl transition-all shadow-lg shadow-green-500/20">
                 Iniciar sesión
               </button>
-
             </form>
           </div>
         </div>
