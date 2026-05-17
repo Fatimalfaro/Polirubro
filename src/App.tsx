@@ -10,11 +10,23 @@ import FormularioProducto from "./components/pages/FormularioProducto"
 import Nosotros from "./components/pages/Nosotros"
 import { BrowserRouter, Routes, Route } from "react-router"
 import ProtectorRutas from "./components/routes/ProtectorRutas"
+import { useEffect, useState } from "react"
+import { AppContext } from "./context/AppContext"
 
 
 
 function App() {
   
+  const usuarioSessionStorage = JSON.parse(
+    sessionStorage.getItem("usuarioKey") || "false",
+  );
+
+  const [usuarioLogueado, setUsuarioLogueado] = useState<boolean>(usuarioSessionStorage);
+  
+  useEffect(()=>{
+    sessionStorage.setItem("usuarioKey", JSON.stringify(usuarioLogueado));
+  },[usuarioLogueado]);
+
   return (
   <BrowserRouter>
     <Navbar></Navbar>
