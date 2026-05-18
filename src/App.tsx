@@ -28,12 +28,14 @@ function App() {
 
 
   useEffect(() => {
-    sessionStorage.setItem('productoKey', JSON.stringify(productos));
-  }[productos]);
-
-  useEffect(() => {
     sessionStorage.setItem("usuarioKey", JSON.stringify(usuario));
   }, [usuario]);
+
+
+   useEffect(() => {
+    localStorage.setItem('productosKey', JSON.stringify(productos));
+  },[productos]);
+
 
   const crearProducto = (dataProducto: ProductoFormData) => {
     const productoNuevo: Producto = {
