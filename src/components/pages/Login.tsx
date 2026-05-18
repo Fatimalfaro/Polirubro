@@ -13,7 +13,7 @@ interface LoginFormInputs{
 
 const Login = () => {
 
-const {setUsuarioLogueado} = useAppContext();
+const {setUsuario} = useAppContext();
 
     const {
     register,
@@ -28,7 +28,7 @@ const {setUsuarioLogueado} = useAppContext();
       data.email === import.meta.env.VITE_EMAIL &&
       data.password === import.meta.env.VITE_PASSWORD
     ){
-      setUsuarioLogueado(true);
+      setUsuario("admin");
       Swal.fire({
         title: "Bienvenido Administrador",
         text: "Ingresando al sistema",
@@ -38,16 +38,38 @@ const {setUsuarioLogueado} = useAppContext();
         confirmButtonColor: "#3b82f6",
     });
     navegacion("/administrador");
-  } else {
+  } 
+
+  if (
+      data.email ===
+        import.meta.env.VITE_CLIENTE_EMAIL &&
+      data.password ===
+        import.meta.env.VITE_CLIENTE_PASSWORD
+    ) {
+
+      setUsuario("cliente");
+
       Swal.fire({
-        title: "Ocurrió un error",
-        text: "Credenciales incorrectas",
-        icon: "error",
+        title: "Bienvenido",
+        text: "Inicio de sesión exitoso",
+        icon: "success",
         background: "#18181b",
         color: "#f4f4f5",
-        confirmButtonColor: "#ef4444",
+        confirmButtonColor: "#22c55e",
       });
+
+      navigate("/");
+
+      return;
     }
+    Swal.fire({
+      title: "Ocurrió un error",
+      text: "Credenciales incorrectas",
+      icon: "error",
+      background: "#18181b",
+      color: "#f4f4f5",
+      confirmButtonColor: "#ef4444",
+    });
   };
 
   const [mostrarPassword, setMostrarPassword] = useState(false);
