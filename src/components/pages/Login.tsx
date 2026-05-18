@@ -3,21 +3,52 @@ import { FaEye, FaEyeSlash, FaLock, FaUser } from "react-icons/fa";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
+import { useAppContext } from "../../context/AppContext"
+import Swal from "sweetalert2"
 
 interface LoginFormInputs{
   email: string;
   password: string;
 }
 
-
 const Login = () => {
+
+const {setUsuarioLogueado} = useAppContext();
 
     const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<LoginFormInputs>();
+  
   const navegacion = useNavigate();
+
+  const onSubmit = (data: LogonFormInputs) => {
+    if(
+      data.email === import.meta.env.VITE_EMAIL &&
+      data.password === import.meta.env.VITE_PASSWORD
+    ){
+      setUsuarioLogueado(true);
+      Swal.fire({
+        title: "Bienvenido Administrador",
+        text: "Ingresando al sistema",
+        icon: "success",
+        background: "#18181b",
+        color: "#f4f4f5",
+        confirmButtonColor: "#3b82f6",
+    });
+    navegacion("/administrador");
+  } else {
+      Swal.fire({
+        title: "Ocurrió un error",
+        text: "Credenciales incorrectas",
+        icon: "error",
+        background: "#18181b",
+        color: "#f4f4f5",
+        confirmButtonColor: "#ef4444",
+      });
+    }
+  };
 
   const [mostrarPassword, setMostrarPassword] = useState(false);
   return (
