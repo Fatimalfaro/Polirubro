@@ -12,7 +12,7 @@ import { BrowserRouter, Routes, Route } from "react-router";
 import ProtectorRutas from "./components/routes/ProtectorRutas";
 import { useEffect, useState } from "react";
 import { AppContext } from "./context/AppContext";
-import type { Producto } from "./interfaces/productos";
+import type { Producto, ProductoFormData } from "./interfaces/productos";
 
 function App() {
   const usuarioSessionStorage = JSON.parse(
@@ -34,6 +34,15 @@ function App() {
   useEffect(() => {
     sessionStorage.setItem("usuarioKey", JSON.stringify(usuario));
   }, [usuario]);
+
+  const crearProducto = (dataProducto: ProductoFormData) => {
+    const productoNuevo: Producto = {
+      ...dataProducto,
+      id: crypto.randomUUID()
+    };
+    setProductos([...productos, productoNuevo]);
+
+  }
 
   return (
     <AppContext.Provider value={{ usuario, setUsuario, productos, crearProducto}}>

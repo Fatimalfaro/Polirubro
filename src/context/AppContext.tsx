@@ -5,7 +5,7 @@ export interface AppContextType{
     usuario: string | null;
     setUsuario: React.Dispatch<React.SetStateAction<boolean>>;
     productos : Producto[];
-    crearProducto: (nuevoProducto:ProductoFormData)
+    crearProducto: (nuevoProducto:ProductoFormData);
 }
 
 export const AppContext = createContext<AppContextType | undefined>(undefined);
