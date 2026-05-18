@@ -23,7 +23,7 @@ const {setUsuarioLogueado} = useAppContext();
   
   const navegacion = useNavigate();
 
-  const onSubmit = (data: LogonFormInputs) => {
+  const onSubmit = (data: LoginFormInputs) => {
     if(
       data.email === import.meta.env.VITE_EMAIL &&
       data.password === import.meta.env.VITE_PASSWORD
@@ -75,7 +75,7 @@ const {setUsuarioLogueado} = useAppContext();
               Ingresa tus credenciales para continuar
             </p>
 
-            <form className="space-y-6">
+            <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
               <div>
                 <label className="block text-sm text-gray-300 mb-2">
                   Usuario
@@ -89,7 +89,7 @@ const {setUsuarioLogueado} = useAppContext();
                   type="email"
                   autoComplete="email"
                     placeholder="Ingresa tu correo electronico"
-                    className={`w-full bg-black border border-gray-800 rounded-xl py-4 pl-12 pr-4 text-white outline-none focus:border-green-500 transition-all ${errors.email ? "border-red-500" : "border-zinc-700"`} 
+                    className={`w-full bg-black border border-gray-800 rounded-xl py-4 pl-12 pr-4 text-white outline-none focus:border-green-500 transition-all ${errors.email ? "border-red-500" : "border-zinc-700"}`} 
 
                   {...register("email", {
                   required: "El email es obligatorio",
