@@ -4,13 +4,19 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
 
+interface LoginFormInputs{
+  email: string;
+  password: string;
+}
+
+
 const Login = () => {
 
     const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm<LoginFormInputs>();
   const navegacion = useNavigate();
 
   const [mostrarPassword, setMostrarPassword] = useState(false);
