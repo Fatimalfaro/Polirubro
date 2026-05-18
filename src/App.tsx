@@ -18,16 +18,16 @@ function App() {
     sessionStorage.getItem("usuarioKey") || "false",
   );
 
-  const [usuarioLogueado, setUsuarioLogueado] = useState<boolean>(
+  const [usuario, setUsuario] = useState<string | null>(
     usuarioSessionStorage,
   );
 
   useEffect(() => {
-    sessionStorage.setItem("usuarioKey", JSON.stringify(usuarioLogueado));
-  }, [usuarioLogueado]);
+    sessionStorage.setItem("usuarioKey", JSON.stringify(usuario));
+  }, [usuario]);
 
   return (
-    <AppContext.Provider value={{ usuarioLogueado, setUsuarioLogueado }}>
+    <AppContext.Provider value={{ usuario, setUsuario }}>
       <BrowserRouter>
         <Navbar></Navbar>
         <main>
