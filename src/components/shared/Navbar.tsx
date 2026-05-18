@@ -9,62 +9,50 @@ const Navbar = () => {
     `block py-2 px-3 transition-colors duration-200 md:p-0 ${
       isActive
         ? "text-green-500 font-semibold"
-        : "text-zinc-300 hover:text-blue-400"
+        : "text-zinc-300 hover:text-green-400"
     }`;
 
   return (
-    <nav>
+    <nav className="sticky top-0 z-50">
       <div>
-        <div className="navbar bg-base-300 shadow-sm">
+        <div className="navbar bg-black shadow-sm">
           {/* Logo y carrito */}
-          <div className="flex-1">
-            <Link to={"/"} className="btn btn-ghost text-x text-green-500 text-2xl">
+          <div>
+            <Link to={"/"}
+              className="btn btn-ghost text-green-500 text-2xl">
               MULTICLICK
             </Link>
           </div>
-            <div className="flex-6">
-
+          <div className="text-xl ml-4">
             <Link to={"/carrito"}>
               <FiShoppingCart />
             </Link>
-            </div>
+          </div>
 
           {/* Botón Hamburguesa (Celular) */}
-          <div className="md:hidden">
+          <div className="md:hidden ml-auto mt-1.5">
             <button
               onClick={() => setIsNavbarOpen(!isNavbarOpen)}
               type="button"
             >
-              {isNavbarOpen ? <FiX /> : <FiMenu />}
+              {isNavbarOpen ? (
+                <FiX className="text-3xl" />
+              ) : (
+                <FiMenu className="text-3xl" />
+              )}
             </button>
           </div>
 
           {/* Navbar desktop */}
-          <div className="hidden md:block">
-            <div className="ml-10 flex items-center space-x-8 capitalize">
-                <NavLink
-              to="/"
-              className={navLinkStyles}
-              
-            >
-              Inicio
-            </NavLink>
-            <NavLink to="/catalogo" >
-              Catalogo
-            </NavLink>
-            <NavLink to="/nosotros" >
-              Nosotros
-            </NavLink>
-            <NavLink to="/administrador" >
-              Administrador
-            </NavLink>
-            <NavLink
-              to="/login"
-              className={navLinkStyles}
-              onClick={() => setIsNavbarOpen(false)}
-            >
-              Login
-            </NavLink>
+          <div className="hidden md:block ml-auto">
+            <div className="mr-10 flex items-center space-x-10">
+              <NavLink to="/" className={navLinkStyles}>
+                Inicio
+              </NavLink>
+              <NavLink to="/catalogo" className={navLinkStyles}>Catalogo</NavLink>
+              <NavLink to="/nosotros" className={navLinkStyles}>Nosotros</NavLink>
+              <NavLink to="/administrador" className={navLinkStyles}>Administrador</NavLink>
+              <NavLink to="/login" className={navLinkStyles}>Login</NavLink>
             </div>
           </div>
         </div>
@@ -73,40 +61,23 @@ const Navbar = () => {
       <div
         className={`${isNavbarOpen ? "max-h-96 " : "max-h-0 overflow-hidden"} md:hidden transition-all duration-300 ease-in-out bg-zinc-900 border-t border-zinc-800 `}
       >
-        <div className="menu menu-horizontal px-1">
-          
-            <NavLink
-              to="/"
-              className={navLinkStyles}
-              
-            >
-              Inicio
-            </NavLink>
-          
-          
-            <NavLink
-              to="/login"
-              className={navLinkStyles}
-              onClick={() => setIsNavbarOpen(false)}
-            >
-              Login
-            </NavLink>
-          
-          
-            <NavLink to="/administrador" >
-              Administrador
-            </NavLink>
-          
-          
-            <NavLink to="/catalogo" >
-              Catalogo
-            </NavLink>
-          
-          
-            <NavLink to="/nosotros" >
-              Nosotros
-            </NavLink>
-          
+        <div className="menu px-1">
+          <NavLink to="/" className={navLinkStyles}>
+            Inicio
+          </NavLink>
+          <NavLink to="/catalogo" className={navLinkStyles}>Catalogo</NavLink>
+
+          <NavLink
+            to="/login"
+            className={navLinkStyles}
+          >
+            Login
+          </NavLink>
+
+          <NavLink to="/administrador" className={navLinkStyles}>Administrador</NavLink>
+
+
+          <NavLink to="/nosotros" className={navLinkStyles}>Nosotros</NavLink>
         </div>
       </div>
     </nav>
