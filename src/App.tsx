@@ -12,6 +12,7 @@ import { BrowserRouter, Routes, Route } from "react-router";
 import ProtectorRutas from "./components/routes/ProtectorRutas";
 import { useEffect, useState } from "react";
 import { AppContext } from "./context/AppContext";
+import type { Producto } from "./interfaces/productos";
 
 function App() {
   const usuarioSessionStorage = JSON.parse(
@@ -22,12 +23,20 @@ function App() {
     usuarioSessionStorage,
   );
 
+  const productosLocalStorage = JSON.parse(localStorage.getItem('productosKey') || "[]");
+  const [productos, setProductos] = useState<Producto[]>(productosLocalStorage)
+
+
+  useEffect(() => {
+    sessionStorage.setItem('productoKey', JSON.stringify(productos));
+  }[productos]);
+
   useEffect(() => {
     sessionStorage.setItem("usuarioKey", JSON.stringify(usuario));
   }, [usuario]);
 
   return (
-    <AppContext.Provider value={{ usuario, setUsuario }}>
+    <AppContext.Provider value={{ usuario, setUsuario, productos, crearProducto}}>
       <BrowserRouter>
         <Navbar></Navbar>
         <main>
