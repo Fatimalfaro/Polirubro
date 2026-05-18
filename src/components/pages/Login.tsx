@@ -1,8 +1,77 @@
 import formularioLogin from "../../assets/formularioLogin.png";
 import { FaEye, FaEyeSlash, FaLock, FaUser } from "react-icons/fa";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router";
+import { useAppContext } from "../../context/AppContext"
+import Swal from "sweetalert2"
+
+interface LoginFormInputs{
+  email: string;
+  password: string;
+}
 
 const Login = () => {
+
+const {setUsuario} = useAppContext();
+
+    const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginFormInputs>();
+  
+  const navegacion = useNavigate();
+
+  const onSubmit = (data: LoginFormInputs) => {
+    if(
+      data.email === import.meta.env.VITE_EMAIL &&
+      data.password === import.meta.env.VITE_PASSWORD
+    ){
+      setUsuario("admin");
+      Swal.fire({
+        title: "Bienvenido Administrador",
+        text: "Ingresando al sistema",
+        icon: "success",
+        background: "#18181b",
+        color: "#f4f4f5",
+        confirmButtonColor: "#3b82f6",
+    });
+    navegacion("/administrador");
+  } 
+
+  if (
+      data.email ===
+        import.meta.env.VITE_CLIENTE_EMAIL &&
+      data.password ===
+        import.meta.env.VITE_CLIENTE_PASSWORD
+    ) {
+
+      setUsuario("cliente");
+
+      Swal.fire({
+        title: "Bienvenido",
+        text: "Inicio de sesión exitoso",
+        icon: "success",
+        background: "#18181b",
+        color: "#f4f4f5",
+        confirmButtonColor: "#22c55e",
+      });
+
+      navigate("/");
+
+      return;
+    }
+    Swal.fire({
+      title: "Ocurrió un error",
+      text: "Credenciales incorrectas",
+      icon: "error",
+      background: "#18181b",
+      color: "#f4f4f5",
+      confirmButtonColor: "#ef4444",
+    });
+  };
+
   const [mostrarPassword, setMostrarPassword] = useState(false);
   return (
     <section className="min-h-screen bg-black flex items-center justify-center px-4 py-10">
@@ -28,7 +97,7 @@ const Login = () => {
               Ingresa tus credenciales para continuar
             </p>
 
-            <form className="space-y-6">
+            <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
               <div>
                 <label className="block text-sm text-gray-300 mb-2">
                   Usuario
@@ -38,10 +107,27 @@ const Login = () => {
                   <FaUser className="absolute left-4 top-1/2 -translate-y-1/2 text-green-500" />
 
                   <input
-                    type="text"
-                    placeholder="Ingresa tu usuario"
-                    className="w-full bg-black border border-gray-800 rounded-xl py-4 pl-12 pr-4 text-white outline-none focus:border-green-500 transition-all"
-                  />
+                   id="email"
+                  type="email"
+                  autoComplete="email"
+                    placeholder="Ingresa tu correo electronico"
+                    className={`w-full bg-black border border-gray-800 rounded-xl py-4 pl-12 pr-4 text-white outline-none focus:border-green-500 transition-all ${errors.email ? "border-red-500" : "border-zinc-700"}`} 
+
+                  {...register("email", {
+                  required: "El email es obligatorio",
+                  pattern: {
+                    value:
+                      /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/,
+                    message: "Email no válido",
+                  },
+                })}
+              />
+              {errors.email && (
+                <span className="text-red-500 text-xs mt-1 italic">
+                  {errors.email.message}
+                </span>
+              )}
+
                 </div>
               </div>
 
@@ -54,10 +140,26 @@ const Login = () => {
                   <FaLock className="absolute left-4 top-1/2 -translate-y-1/2 text-green-500" />
 
                   <input
+                  id="password"
+                autoComplete="current-password"
                     type={mostrarPassword ? "text" : "password"}
                     placeholder="Ingresa tu contraseña"
-                    className="w-full bg-black border border-gray-800 rounded-xl py-4 pl-12 pr-14 text-white outline-none focus:border-green-500 transition-all"
-                  />
+                    className={`w-full bg-black border border-gray-800 rounded-xl py-4 pl-12 pr-14 text-white outline-none focus:border-green-500 transition-all ${errors.password ? "border-red-500" : "border-zinc-700"}`}
+                    {...register("password", {
+                  required: "La contraseña es obligatoria",
+                  pattern: {
+                    value:
+                      /^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{8,16}$/,
+                    message:
+                      "Debe tener 8-16 caracteres, mayúscula, minúscula, número y símbolo.",
+                  },
+                })}
+              />
+              {errors.password && (
+                <span className="text-red-500 text-xs mt-1 italic">
+                  {errors.password.message}
+                </span>
+              )}
 
                   <button
                     type="button"
