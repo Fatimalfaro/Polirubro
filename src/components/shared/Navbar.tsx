@@ -1,9 +1,17 @@
 import { useState } from "react";
-import { Link, NavLink } from "react-router";
+import { Link, NavLink, useNavigate } from "react-router";
 import { FiMenu, FiX, FiShoppingCart } from "react-icons/fi";
+import { useAppContext } from "../../context/AppContext";
 
 const Navbar = () => {
   const [isNavbarOpen, setIsNavbarOpen] = useState(false);
+  const {usuario, setUSuario} = useAppContext();
+  const navegacion = useNavigate();
+
+  const logout = () => {
+    setUSuario(false);
+    navegacion("/");
+  }
 
   const navLinkStyles = ({ isActive }: { isActive: boolean }) =>
     `block py-2 px-3 transition-colors duration-200 md:p-0 ${
