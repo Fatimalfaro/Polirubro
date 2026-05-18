@@ -1,152 +1,28 @@
 import { useEffect, useState } from 'react';
 import { type Producto } from '../../interfaces/productos';
-// 1. Importamos la Card directo aquí
 import CardProducto from '../products/CardProducto'; 
 
 const Catalogo = () => {
-  // Datos de prueba fijos para el maquetado
-  const [productos, setProductos] = useState<Producto[]>([
-    {
-      id: "1",
-      nombreProducto: "Teclado Mecánico RGB Pro",
-      precio: 85000,
-      categoria: "Electro",
-      imagen: "https://images.unsplash.com/photo-1618384887929-16ec33fab9ef?q=80&w=500&auto=format&fit=crop",
-      descripcion: "Teclado mecánico con switches blue, retroiluminación RGB personalizada y respuesta ultra rápida para gaming extremo.",
-      stock: 12
-    },
-    {
-      id: "2",
-      nombreProducto: "Set de Vasos de Cristal",
-      precio: 24000,
-      categoria: "Bazar",
-      imagen: "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?q=80&w=500&auto=format&fit=crop",
-      descripcion: "Set x6 vasos de vidrio templado.",
-      stock: 0
-    },
-    {
-      id: "3",
-      nombreProducto: "Mouse Gamer Inalámbrico",
-      precio: 42000,
-      categoria: "Ofertas Mundialistas",
-      imagen: "https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?q=80&w=500&auto=format&fit=crop",
-      descripcion: "Mouse ergonómico inalámbrico con sensor óptico de alta precisión.",
-      stock: 5
-    },
-    {
-      id: "4",
-      nombreProducto: "Teclado Mecánico RGB Pro",
-      precio: 85000,
-      categoria: "Electro",
-      imagen: "https://images.unsplash.com/photo-1618384887929-16ec33fab9ef?q=80&w=500&auto=format&fit=crop",
-      descripcion: "Teclado mecánico con switches blue, retroiluminación RGB personalizada y respuesta ultra rápida para gaming extremo.",
-      stock: 12
-    },
-    {
-      id: "5",
-      nombreProducto: "Set de Vasos de Cristal",
-      precio: 24000,
-      categoria: "Bazar",
-      imagen: "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?q=80&w=500&auto=format&fit=crop",
-      descripcion: "Set x6 vasos de vidrio templado.",
-      stock: 0
-    },
-    {
-      id: "6",
-      nombreProducto: "Mouse Gamer Inalámbrico",
-      precio: 42000,
-      categoria: "Ofertas Mundialistas",
-      imagen: "https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?q=80&w=500&auto=format&fit=crop",
-      descripcion: "Mouse ergonómico inalámbrico con sensor óptico de alta precisión.",
-      stock: 5
-    },
-    {
-      id: "7",
-      nombreProducto: "Teclado Mecánico RGB Pro",
-      precio: 85000,
-      categoria: "Electro",
-      imagen: "https://images.unsplash.com/photo-1618384887929-16ec33fab9ef?q=80&w=500&auto=format&fit=crop",
-      descripcion: "Teclado mecánico con switches blue, retroiluminación RGB personalizada y respuesta ultra rápida para gaming extremo.",
-      stock: 12
-    },
-    {
-      id: "8",
-      nombreProducto: "Set de Vasos de Cristal",
-      precio: 24000,
-      categoria: "Bazar",
-      imagen: "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?q=80&w=500&auto=format&fit=crop",
-      descripcion: "Set x6 vasos de vidrio templado.",
-      stock: 0
-    },
-    {
-      id: "9",
-      nombreProducto: "Mouse Gamer Inalámbrico",
-      precio: 42000,
-      categoria: "Ofertas Mundialistas",
-      imagen: "https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?q=80&w=500&auto=format&fit=crop",
-      descripcion: "Mouse ergonómico inalámbrico con sensor óptico de alta precisión.",
-      stock: 5
-    },
-    {
-      id: "10",
-      nombreProducto: "Teclado Mecánico RGB Pro",
-      precio: 85000,
-      categoria: "Electro",
-      imagen: "https://images.unsplash.com/photo-1618384887929-16ec33fab9ef?q=80&w=500&auto=format&fit=crop",
-      descripcion: "Teclado mecánico con switches blue, retroiluminación RGB personalizada y respuesta ultra rápida para gaming extremo.",
-      stock: 12
-    },
-    {
-      id: "11",
-      nombreProducto: "Set de Vasos de Cristal",
-      precio: 24000,
-      categoria: "Bazar",
-      imagen: "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?q=80&w=500&auto=format&fit=crop",
-      descripcion: "Set x6 vasos de vidrio templado.",
-      stock: 0
-    },
-    {
-      id: "12",
-      nombreProducto: "Mouse Gamer Inalámbrico",
-      precio: 42000,
-      categoria: "Ofertas Mundialistas",
-      imagen: "https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?q=80&w=500&auto=format&fit=crop",
-      descripcion: "Mouse ergonómico inalámbrico con sensor óptico de alta precisión.",
-      stock: 5
-    },
-    {
-      id: "13",
-      nombreProducto: "Teclado Mecánico RGB Pro",
-      precio: 85000,
-      categoria: "Electro",
-      imagen: "https://images.unsplash.com/photo-1618384887929-16ec33fab9ef?q=80&w=500&auto=format&fit=crop",
-      descripcion: "Teclado mecánico con switches blue, retroiluminación RGB personalizada y respuesta ultra rápida para gaming extremo.",
-      stock: 12
-    },
-    {
-      id: "14",
-      nombreProducto: "Set de Vasos de Cristal",
-      precio: 24000,
-      categoria: "Bazar",
-      imagen: "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?q=80&w=500&auto=format&fit=crop",
-      descripcion: "Set x6 vasos de vidrio templado.",
-      stock: 0
-    },
-    {
-      id: "15",
-      nombreProducto: "Mouse Gamer Inalámbrico",
-      precio: 42000,
-      categoria: "Ofertas Mundialistas",
-      imagen: "https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?q=80&w=500&auto=format&fit=crop",
-      descripcion: "Mouse ergonómico inalámbrico con sensor óptico de alta precisión.",
-      stock: 5
-    }
-  ]);
+  // 1. Inicializamos el estado como un array VACÍO
+  const [productos, setProductos] = useState<Producto[]>([]);
 
-  // Filtros de categorías
-  const productosElectro = productos.filter(p => p.categoria === 'Electro');
-  const productosBazar = productos.filter(p => p.categoria === 'Bazar');
-  const productosOfertas = productos.filter(p => p.categoria === 'Ofertas Mundialistas');
+  // 2. Usamos useEffect para leer el LocalStorage al cargar el componente
+  useEffect(() => {
+    const guardados = localStorage.getItem("productos_proyecto");
+    if (guardados) {
+      try {
+        const parseados = JSON.parse(guardados);
+        setProductos(parseados);
+      } catch (error) {
+        console.error("Error al parsear los productos del storage:", error);
+      }
+    }
+  }, []); // El array vacío asegura que solo se ejecute UNA VEZ al montar la página
+
+  // 3. Tus filtros siguen funcionando exactamente igual de forma dinámica:
+  const productosElectro = productos.filter(p => p.categoria === 'Electro').slice(0,4);
+  const productosBazar = productos.filter(p => p.categoria === 'Bazar').slice(0,4);
+  const productosOfertas = productos.filter(p => p.categoria === 'Ofertas Mundialistas').slice(0,4);
 
   return (
     <div className="min-h-screen bg-zinc-900 text-white p-4 md:p-8 space-y-12">
