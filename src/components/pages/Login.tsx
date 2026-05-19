@@ -25,8 +25,8 @@ const {setUsuario} = useAppContext();
 
   const onSubmit = (data: LoginFormInputs) => {
     if(
-      data.email === import.meta.env.VITE_EMAIL &&
-      data.password === import.meta.env.VITE_PASSWORD
+      data.email === import.meta.env.VITE_ADMIN_EMAIL &&
+      data.password === import.meta.env.VITE_ADMIN_PASSWORD
     ){
       setUsuario("admin");
       Swal.fire({
@@ -38,6 +38,7 @@ const {setUsuario} = useAppContext();
         confirmButtonColor: "#3b82f6",
     });
     navegacion("/administrador");
+    return;
   } 
 
   if (
@@ -58,7 +59,7 @@ const {setUsuario} = useAppContext();
         confirmButtonColor: "#22c55e",
       });
 
-      navigate("/");
+      navegacion("/");
 
       return;
     }
