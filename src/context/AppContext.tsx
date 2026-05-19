@@ -1,9 +1,12 @@
 import {createContext, useContext} from "react";
+import type { Producto, ProductoFormData } from "../interfaces/productos";
 
 export interface AppContextType{
     usuario: string | null;
-    setUsuario: React.Dispatch<React.SetStateAction<boolean>>;
-}
+    setUsuario: React.Dispatch<React.SetStateAction<string | null>>;
+    productos : Producto[];
+    crearProducto: (nuevoProducto:ProductoFormData) => void;
+} 
 
 export const AppContext = createContext<AppContextType | undefined>(undefined);
 

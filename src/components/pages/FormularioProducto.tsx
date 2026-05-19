@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
-import { type ProductoFormData } from "../../interfaces/productos";
-
+import { type Producto, type ProductoFormData } from "../../interfaces/productos";
+import Swal from "sweetalert2";
 
 const FormularioProducto = () => {
   // 1. PRIMERO inicializamos el useForm para que esté disponible en todo el componente
@@ -12,20 +12,43 @@ const FormularioProducto = () => {
   } = useForm<ProductoFormData>();
 
   // 2. SEGUNDO definimos la función que maneja el envío usando el nombre correcto
-  const onSubmitVisual = (data: ProductoFormData) => {
-    console.log("Datos del formulario válidos:", data);
+  const onSubmit = (data: ProductoFormData) => {
+    try {
+    // 1. Obtener lo que ya existe en LocalStorage (si no hay nada, inicializa un array vacío)
+    const productosGuardados = localStorage.getItem("productos_proyecto");
+    const listaActual: Producto[] = productosGuardados ? JSON.parse(productosGuardados) : [];
 
-    // Disparamos la animación de SweetAlert2
+    // 2. Crear el objeto final combinando los datos del form, agregando ID y parseando números
+    const nuevoProducto: Producto = {
+      ...data,
+      id: crypto.randomUUID(), // Genera un ID único e irrepetible
+      precio: Number(data.precio), // Asegura que se guarde como número y no string
+      stock: Number(data.stock)    // Asegura que se guarde como número y no string
+    };
+
+    // 3. Guardar el nuevo array completo en LocalStorage
+    localStorage.setItem("productos_proyecto", JSON.stringify([...listaActual, nuevoProducto]));
+    
+    // 4. Mostrar feedback de éxito con SweetAlert2
     Swal.fire({
       title: "¡Producto Creado!",
-      text: `El producto "${data.nombreProducto}" se maquetó y validó con éxito.`,
+      text: `El producto "${data.nombreProducto}" se guardó en el sistema.`,
       icon: "success",
       confirmButtonText: "Genial",
-      confirmButtonColor: "#16a34a", // Sincronizado con el bg-green-600 de tu botón
+      confirmButtonColor: "#16a34a",
     });
 
-    // Limpiamos los campos visualmente después del éxito
+    // 5. Resetear los campos del formulario
     reset();
+
+  } catch (error) {
+    console.error("Error al guardar en LocalStorage:", error);
+    Swal.fire({
+      title: "Error",
+      text: "No se pudo guardar el producto.",
+      icon: "error"
+    });
+  }
   };
 
   return (
@@ -35,8 +58,8 @@ const FormularioProducto = () => {
           Nuevo Producto
         </h2>
 
-        {/* 3. CORRECCIÓN AQUÍ: Pasamos la función exacta "onSubmitVisual" */}
-        <form onSubmit={handleSubmit(onSubmitVisual)} className="space-y-6">
+        
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
           
           {/* Nombre del Producto */}
           <div className="form-control w-full">
