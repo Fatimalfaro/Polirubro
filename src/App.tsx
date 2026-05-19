@@ -15,9 +15,9 @@ import { AppContext } from "./context/AppContext";
 import type { Producto, ProductoFormData } from "./interfaces/productos";
 
 function App() {
-  const usuarioSessionStorage = JSON.parse(
-    sessionStorage.getItem("usuarioKey") || "false",
-  );
+ const usuarioSessionStorage = JSON.parse(
+  sessionStorage.getItem("usuarioKey") || "null"
+);
 
   const [usuario, setUsuario] = useState<string | null>(
     usuarioSessionStorage,
