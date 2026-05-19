@@ -17,8 +17,9 @@ function App() {
   
   return (
   <BrowserRouter>
-    <Navbar></Navbar>
-    <main>
+  <div className="flex flex-col min-h-screen" >
+      <Navbar></Navbar>
+    <main className="grow container mx-auto my-4 px-4 py-8" >
     <Routes>
         <Route path="/" element={<Inicio/>}></Route>
         <Route path="/catalogo" element={<Catalogo/>}></Route>
@@ -36,7 +37,10 @@ function App() {
     </Routes>
     </main>
     <Footer></Footer>
+  </div>
+  
   </BrowserRouter>
+
     
   );
 }
