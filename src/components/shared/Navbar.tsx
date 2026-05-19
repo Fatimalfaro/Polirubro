@@ -3,6 +3,7 @@ import { Link, NavLink, useNavigate } from "react-router";
 import { FiMenu, FiX, FiShoppingCart } from "react-icons/fi";
 import { useAppContext } from "../../context/AppContext";
 import { LuLogOut } from "react-icons/lu";
+import Swal from "sweetalert2";
 
 const Navbar = () => {
   const [isNavbarOpen, setIsNavbarOpen] = useState(false);
@@ -13,6 +14,25 @@ const Navbar = () => {
     setUsuario(null);
     navegacion("/");
   } 
+
+  const handleCarrito = () => {
+    if (usuario !== "cliente") {
+      Swal.fire({
+        title: "Debes iniciar sesión",
+        text: "Inicia sesión para acceder al carrito",
+        icon: "warning",
+        background: "#18181b",
+        color: "#f4f4f5",
+        confirmButtonColor: "#22c55e",
+      }).then(() => {
+        navegacion("/login");
+      });
+
+      return;
+    }
+
+    navegacion("/carrito");
+  };
 
   const navLinkStyles = ({ isActive }: { isActive: boolean }) =>
     `block py-2 px-3 transition-colors duration-200 md:p-0 ${
@@ -32,13 +52,17 @@ const Navbar = () => {
               MULTICLICK
             </Link>
           </div>
-          
-          {usuario === "cliente" && (
-          <div className="text-xl ml-4">
-            <Link to={"/carrito"}>
-              <FiShoppingCart />
-            </Link>
-          </div>
+
+           {usuario !== "admin" && (
+            <div className="text-xl ml-4">
+
+              <button onClick={handleCarrito}>
+
+                <FiShoppingCart />
+
+              </button>
+
+            </div>
           )}
 
           {/* Botón Hamburguesa (Celular) */}
@@ -68,7 +92,15 @@ const Navbar = () => {
                 <button onClick={logout}
                 className="flex items-center gap-2 bg-zinc-800 hover:bg-red-900/40 text-red-400 px-4 py-2 rounded text-sm font-medium transition-all border border-zinc-700 hover:border-red-500/50"><LuLogOut/>Logout</button>
               </>
-              ): (
+              ): usuario === "cliente" ? (
+                 <button
+                  onClick={logout}
+                  className="flex items-center gap-2 bg-zinc-800 hover:bg-red-900/40 text-red-400 px-4 py-2 rounded text-sm font-medium transition-all border border-zinc-700 hover:border-red-500/50"
+                >
+                  <LuLogOut />
+                  Logout
+                </button>
+              ) : (
               <NavLink to="/login" className={navLinkStyles}>Login</NavLink>
               )}
               <NavLink to="/catalogo" className={navLinkStyles}>Catalogo</NavLink>
@@ -117,6 +149,14 @@ const Navbar = () => {
         Logout
       </button>
     </>
+        ) : usuario === "cliente" ? (
+            <button
+              onClick={logout}
+              className="flex items-center gap-2 text-red-400 px-3 py-2"
+            >
+              <LuLogOut />
+              Logout
+            </button>
 
   ) : (
 
