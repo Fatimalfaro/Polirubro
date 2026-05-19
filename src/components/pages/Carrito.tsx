@@ -85,7 +85,16 @@ const Carrito = () => {
                 <button className="text-zinc-400 hover:text-red-500 transition-all ml-4">
                   <FiTrash2 size={22} />
                 </button>
+
+                 
+
               </div>
+              
+            </div>
+            <div className="mt-8">
+              <button className="border border-zinc-700 hover:border-green-500 text-green-500 px-6 py-3 rounded-xl transition-all">
+                ← Seguir comprando
+              </button>
             </div>
         </div>
 
