@@ -57,10 +57,18 @@ const Navbar = () => {
               <NavLink to="/" className={navLinkStyles}>
                 Inicio
               </NavLink>
+              
+              {usuario ? (
+                <>
+                <NavLink to="/administrador" className={navLinkStyles}>Administrador</NavLink>
+                <button onClick={logout}
+                className="flex items-center gap-2 bg-zinc-800 hover:bg-red-900/40 text-red-400 px-4 py-2 rounded text-sm font-medium transition-all border border-zinc-700 hover:border-red-500/50"><LuLogOut/>Logout</button>
+              </>
+              ): (
+              <NavLink to="/login" className={navLinkStyles}>Login</NavLink>
+              )}
               <NavLink to="/catalogo" className={navLinkStyles}>Catalogo</NavLink>
               <NavLink to="/nosotros" className={navLinkStyles}>Nosotros</NavLink>
-              <NavLink to="/administrador" className={navLinkStyles}>Administrador</NavLink>
-              <NavLink to="/login" className={navLinkStyles}>Login</NavLink>
             </div>
           </div>
         </div>
