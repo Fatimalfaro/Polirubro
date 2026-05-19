@@ -1,4 +1,5 @@
 import { FiMinus, FiPlus, FiShoppingCart, FiTrash2 } from "react-icons/fi";
+import { LuShieldCheck, LuTruck, LuHeadphones } from "react-icons/lu";
 
 const Carrito = () => {
   return (
@@ -138,8 +139,52 @@ const Carrito = () => {
                 Compra 100% segura
               </p>
             </div>
+             <div className="bg-zinc-950 border border-zinc-800 rounded-2xl p-6 space-y-6">
+              
+              <div className="flex gap-4">
+                <LuTruck className="text-green-500 text-3xl" />
+
+                <div>
+                  <h3 className="font-semibold">
+                    Envíos a todo el país
+                  </h3>
+
+                  <p className="text-sm text-zinc-400">
+                    Rápidos y seguros
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex gap-4">
+                <LuShieldCheck className="text-green-500 text-3xl" />
+
+                <div>
+                  <h3 className="font-semibold">
+                    Pagos 100% seguros
+                  </h3>
+
+                  <p className="text-sm text-zinc-400">
+                    Protegemos tus datos
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex gap-4">
+                <LuHeadphones className="text-green-500 text-3xl" />
+
+                <div>
+                  <h3 className="font-semibold">
+                    Atención personalizada
+                  </h3>
+
+                  <p className="text-sm text-zinc-400">
+                    Estamos para ayudarte
+                  </p>
+                </div>
+              </div>
             </div>
-            </div>
+          </div>
+        </div>
             </div>
 </section>
 
