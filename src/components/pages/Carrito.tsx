@@ -114,11 +114,6 @@ const Carrito = () => {
                   <span>Subtotal (7 productos)</span>
                   <span>$149.920</span>
                 </div>
-
-                <div className="flex justify-between text-zinc-400">
-                  <span>Envío</span>
-                  <span>$4.990</span>
-                </div>
               </div>
 
               <div className="flex justify-between items-center mt-6">
@@ -182,6 +177,64 @@ const Carrito = () => {
                   </p>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 mt-12">
+          
+          <div className="bg-zinc-950 border border-zinc-800 rounded-2xl p-6 flex items-center gap-4">
+            <LuTruck className="text-green-500 text-4xl" />
+
+            <div>
+              <h3 className="font-semibold">
+                Envíos a todo el país
+              </h3>
+
+              <p className="text-sm text-zinc-400">
+                Rápidos y seguros
+              </p>
+            </div>
+          </div>
+
+          <div className="bg-zinc-950 border border-zinc-800 rounded-2xl p-6 flex items-center gap-4">
+            <LuShieldCheck className="text-green-500 text-4xl" />
+
+            <div>
+              <h3 className="font-semibold">
+                Compra 100% segura
+              </h3>
+
+              <p className="text-sm text-zinc-400">
+                Protegemos tus datos
+              </p>
+            </div>
+          </div>
+
+          <div className="bg-zinc-950 border border-zinc-800 rounded-2xl p-6 flex items-center gap-4">
+            <LuHeadphones className="text-green-500 text-4xl" />
+
+            <div>
+              <h3 className="font-semibold">
+                Atención personalizada
+              </h3>
+
+              <p className="text-sm text-zinc-400">
+                Estamos para ayudarte
+              </p>
+            </div>
+          </div>
+
+          <div className="bg-zinc-950 border border-zinc-800 rounded-2xl p-6 flex items-center gap-4">
+            <LuShieldCheck className="text-green-500 text-4xl" />
+
+            <div>
+              <h3 className="font-semibold">
+                Productos de calidad
+              </h3>
+
+              <p className="text-sm text-zinc-400">
+                Elegidos para vos
+              </p>
             </div>
           </div>
         </div>
