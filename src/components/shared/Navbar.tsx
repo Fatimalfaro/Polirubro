@@ -103,7 +103,6 @@ const Navbar = () => {
               ) : (
               <NavLink to="/login" className={navLinkStyles}>Login</NavLink>
               )}
-              <NavLink to="/catalogo" className={navLinkStyles}>Catalogo</NavLink>
               <NavLink to="/nosotros" className={navLinkStyles}>Nosotros</NavLink>
             </div>
           </div>
@@ -117,7 +116,6 @@ const Navbar = () => {
           <NavLink to="/" className={navLinkStyles}>
             Inicio
           </NavLink>
-          <NavLink to="/catalogo" className={navLinkStyles}>Catalogo</NavLink>
 
           <NavLink
             to="/login"
