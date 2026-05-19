@@ -2,16 +2,17 @@ import { useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router";
 import { FiMenu, FiX, FiShoppingCart } from "react-icons/fi";
 import { useAppContext } from "../../context/AppContext";
+import { LuLogOut } from "react-icons/lu";
 
 const Navbar = () => {
   const [isNavbarOpen, setIsNavbarOpen] = useState(false);
-  const {usuario, setUSuario} = useAppContext();
+  const {usuario, setUsuario} = useAppContext();
   const navegacion = useNavigate();
 
   const logout = () => {
-    setUSuario(false);
+    setUsuario(null);
     navegacion("/");
-  }
+  } 
 
   const navLinkStyles = ({ isActive }: { isActive: boolean }) =>
     `block py-2 px-3 transition-colors duration-200 md:p-0 ${
@@ -58,7 +59,7 @@ const Navbar = () => {
                 Inicio
               </NavLink>
               
-              {usuario ? (
+              {usuario === "admin" ? (
                 <>
                 <NavLink to="/administrador" className={navLinkStyles}>Administrador</NavLink>
                 <button onClick={logout}
