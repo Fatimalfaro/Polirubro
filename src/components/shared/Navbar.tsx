@@ -95,6 +95,37 @@ const Navbar = () => {
 
 
           <NavLink to="/nosotros" className={navLinkStyles}>Nosotros</NavLink>
+
+{usuario === "admin" ? (
+
+    <>
+      <NavLink
+        to="/administrador"
+        className={navLinkStyles}
+      >
+        Administrador
+      </NavLink>
+
+      <button
+        onClick={logout}
+        className="flex items-center gap-2 text-red-400 px-3 py-2"
+      >
+        <LuLogOut />
+        Logout
+      </button>
+    </>
+
+  ) : (
+
+    <NavLink
+      to="/login"
+      className={navLinkStyles}
+    >
+      Login
+    </NavLink>
+
+  )}
+
         </div>
       </div>
     </nav>
