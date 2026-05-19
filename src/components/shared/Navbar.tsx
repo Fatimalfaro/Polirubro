@@ -32,11 +32,14 @@ const Navbar = () => {
               MULTICLICK
             </Link>
           </div>
+          
+          {usuario === "cliente" && (
           <div className="text-xl ml-4">
             <Link to={"/carrito"}>
               <FiShoppingCart />
             </Link>
           </div>
+          )}
 
           {/* Botón Hamburguesa (Celular) */}
           <div className="md:hidden ml-auto mt-1.5">
