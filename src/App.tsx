@@ -26,6 +26,12 @@ function App() {
   const productosLocalStorage = JSON.parse(localStorage.getItem('productosKey') || "[]");
   const [productos, setProductos] = useState<Producto[]>(productosLocalStorage)
 
+  const carritoLocalStorage = JSON.parse(
+  localStorage.getItem("carritoKey") || "[]"
+);
+
+const [carrito, setCarrito] = useState<Producto[]>(carritoLocalStorage);
+
 
   useEffect(() => {
     sessionStorage.setItem("usuarioKey", JSON.stringify(usuario));
@@ -35,6 +41,12 @@ function App() {
    useEffect(() => {
     localStorage.setItem('productosKey', JSON.stringify(productos));
   },[productos]);
+  
+  
+useEffect(() => {
+  localStorage.setItem("carritoKey", JSON.stringify(carrito));
+}, [carrito]);
+
 
 
   const crearProducto = (dataProducto: ProductoFormData) => {
