@@ -1,13 +1,14 @@
 import { useState } from "react";
-import { useParams } from "react-router";
+import { useParams, useNavigate } from "react-router";
 import { FiShoppingCart, FiMinus, FiPlus } from "react-icons/fi";
 
 import { useAppContext } from "../../context/AppContext";
 
 const DetalleProducto = () => {
   const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
 
-  const { productos, agregarAlCarrito } = useAppContext();
+  const { productos, agregarAlCarrito, usuario } = useAppContext();
 
   // Buscar producto usando el id de la URL
   const producto = productos.find((p) => p.id === id);
@@ -37,8 +38,16 @@ const DetalleProducto = () => {
   };
 
   const handleAgregarCarrito = () => {
-    agregarAlCarrito(producto);
-  };
+
+  if (!usuario) {
+    navigate("/login");
+    return;
+  }
+
+  agregarAlCarrito(producto, cantidad);
+
+  navigate("/carrito");
+};
 
   return (
     <div className="min-h-screen bg-[#0b0c10] text-gray-200 font-sans p-6 md:p-12">

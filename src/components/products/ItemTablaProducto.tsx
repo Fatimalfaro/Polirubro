@@ -1,10 +1,11 @@
 import { type Producto } from "../../interfaces/productos";
-
+import { useAppContext } from "../../context/AppContext";
 interface Props {
   producto: Producto;
 }
 
 const ItemTablaProducto = ({ producto }: Props) => {
+  const { eliminarProducto } = useAppContext();
   return (
     <tr className="border-b border-gray-800 hover:bg-[#151515] transition-all">
 
@@ -29,7 +30,7 @@ const ItemTablaProducto = ({ producto }: Props) => {
       </td>
 
       <td className="px-6 py-5 text-green-500 font-semibold">
-        ${producto.precio.toLocaleString("es-AR")}
+        ${Number(producto.precio).toLocaleString("es-AR")}
       </td>
 
       <td className="px-6 py-5">
@@ -48,6 +49,7 @@ const ItemTablaProducto = ({ producto }: Props) => {
           </button>
 
           <button
+          onClick={() => eliminarProducto(producto.id)}
             className="bg-red-500/10 hover:bg-red-500/20 text-red-400 px-4 py-2 rounded-xl transition-all"
           >
             Eliminar

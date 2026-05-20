@@ -11,7 +11,7 @@ import { BrowserRouter, Routes, Route } from "react-router";
 import ProtectorRutas from "./components/routes/ProtectorRutas";
 import { useEffect, useState } from "react";
 import { AppContext } from "./context/AppContext";
-import type { Producto, ProductoFormData } from "./interfaces/productos";
+import type { Producto, ProductoFormData, ProductoCarrito } from "./interfaces/productos";
 import DetalleProducto from "./components/pages/DetalleProducto";
 
 function App() {
@@ -26,6 +26,7 @@ function App() {
   );
   const [productos, setProductos] = useState<Producto[]>(productosLocalStorage);
 
+const [carrito, setCarrito] = useState<ProductoCarrito[]>(carritoLocalStorage);
   const carritoLocalStorage = JSON.parse(
     localStorage.getItem("carritoKey") || "[]",
   );

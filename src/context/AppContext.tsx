@@ -9,6 +9,7 @@ export interface AppContextType{
     editarProducto: (id: string, producto: ProductoFormData) => void;
     carrito: Producto[];
     agregarAlCarrito: (producto: Producto) => void;
+    eliminarDelCarrito: (id: string) => void;
 } 
 
 export const AppContext = createContext<AppContextType | undefined>(undefined);
