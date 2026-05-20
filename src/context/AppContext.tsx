@@ -1,15 +1,16 @@
 import {createContext, useContext} from "react";
-import type { Producto, ProductoFormData } from "../interfaces/productos";
+import type { Producto, ProductoFormData, ProductoCarrito } from "../interfaces/productos";
 
 export interface AppContextType{
     usuario: string | null;
     setUsuario: React.Dispatch<React.SetStateAction<string | null>>;
     productos : Producto[];
     crearProducto: (nuevoProducto:ProductoFormData) => void;
-    editarProducto: (id: string, producto: ProductoFormData) => void;
-    carrito: Producto[];
-    agregarAlCarrito: (producto: Producto) => void;
+    carrito: ProductoCarrito[];
+    agregarAlCarrito: (producto: Producto, cantidad:number) => void;
     eliminarDelCarrito: (id: string) => void;
+    eliminarProducto: (id: string) => void;
+    editarProducto: (id: string, productoEditado: ProductoFormData) => void;
 } 
 
 export const AppContext = createContext<AppContextType | undefined>(undefined);

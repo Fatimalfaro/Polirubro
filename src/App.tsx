@@ -26,13 +26,13 @@ function App() {
   );
   const [productos, setProductos] = useState<Producto[]>(productosLocalStorage);
 
-const [carrito, setCarrito] = useState<ProductoCarrito[]>(carritoLocalStorage);
+
   const carritoLocalStorage = JSON.parse(
     localStorage.getItem("carritoKey") || "[]",
   );
+  const [carrito, setCarrito] = useState<ProductoCarrito[]>(carritoLocalStorage);
 
-  const [carrito, setCarrito] = useState<Producto[]>(carritoLocalStorage);
-
+  
   useEffect(() => {
     sessionStorage.setItem("usuarioKey", JSON.stringify(usuario));
   }, [usuario]);
@@ -68,9 +68,52 @@ const [carrito, setCarrito] = useState<ProductoCarrito[]>(carritoLocalStorage);
     );
   };
 
-  const agregarAlCarrito = (producto: Producto) => {
-    setCarrito([...carrito, producto]);
-  };
+  const agregarAlCarrito = (
+  producto: Producto,
+  cantidad: number
+) => {
+
+  const productoExistente = carrito.find(
+    (item) => item.id === producto.id
+  );
+
+  if (productoExistente) {
+
+    const carritoActualizado = carrito.map((item) =>
+      item.id === producto.id
+        ? {
+            ...item,
+            cantidad: item.cantidad + cantidad
+          }
+        : item
+    );
+
+    setCarrito(carritoActualizado);
+
+  } else {
+
+    setCarrito([
+      ...carrito,
+      {
+        ...producto,
+        cantidad
+      }
+    ]);
+
+  }
+};
+
+const eliminarDelCarrito = (id: string) => {
+  setCarrito(
+    carrito.filter((item) => item.id !== id)
+  );
+};
+
+const eliminarProducto = (id: string) => {
+  setProductos(
+    productos.filter((producto) => producto.id !== id)
+  );
+};
 
   return (
     <AppContext.Provider
@@ -82,6 +125,8 @@ const [carrito, setCarrito] = useState<ProductoCarrito[]>(carritoLocalStorage);
         editarProducto,
         carrito,
         agregarAlCarrito,
+        eliminarDelCarrito,
+        eliminarProducto
       }}
     >
       <BrowserRouter>

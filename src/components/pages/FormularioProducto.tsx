@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { useEffect } from "react";
 import { useParams, useNavigate } from "react-router";
-import { type Producto, type ProductoFormData } from "../../interfaces/productos";
+import type{ProductoFormData } from "../../interfaces/productos";
 import Swal from "sweetalert2";
 import { useAppContext } from "../../context/AppContext";
 

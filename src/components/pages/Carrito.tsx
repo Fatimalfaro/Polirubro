@@ -1,4 +1,4 @@
-import { FiMinus, FiPlus, FiShoppingCart, FiTrash2 } from "react-icons/fi";
+import {FiShoppingCart, FiTrash2 } from "react-icons/fi";
 import { LuShieldCheck, LuTruck, LuHeadphones } from "react-icons/lu";
 import { useAppContext } from "../../context/AppContext";
 import { Link } from "react-router";
