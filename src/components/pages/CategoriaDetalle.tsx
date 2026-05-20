@@ -30,7 +30,7 @@ const CategoriaDetalle = () => {
     p.nombreProducto.toLowerCase().includes(busqueda.toLowerCase()) ||
     p.descripcion.toLowerCase().includes(busqueda.toLowerCase())
   );
-  );
+  
 
   return (
     <div className="min-h-screen bg-zinc-900 text-white p-4 md:p-8 space-y-8">

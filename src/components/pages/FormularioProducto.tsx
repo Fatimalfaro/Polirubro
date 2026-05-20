@@ -149,7 +149,7 @@ const FormularioProducto = ({ titulo }: { titulo: string }) => {
             <input
               type="text"
               placeholder="https://ejemplo.com/foto.png"
-              className={`input input-bordered mr-1 ${errors.imagen ? 'input-error' : ''}`}
+              className={`input input-bordered mr-1 w-full ${errors.imagen ? 'input-error' : ''}`}
               {...register("imagen", { 
                 required: "La URL es obligatoria",
                 pattern: {
@@ -167,7 +167,7 @@ const FormularioProducto = ({ titulo }: { titulo: string }) => {
               <span className="label-text font-bold text-green-500 mr-1">Descripción</span>
             </label>
             <textarea
-              className={`textarea textarea-bordered h-24 mr-1 ${errors.descripcion ? 'textarea-error' : ''}`}
+              className={`textarea textarea-bordered h-24 mr-1 w-full ${errors.descripcion ? 'textarea-error' : ''}`}
               placeholder="Escribe los detalles aquí..."
               {...register("descripcion", { 
                 required: "La descripción es necesaria",
@@ -201,7 +201,7 @@ const FormularioProducto = ({ titulo }: { titulo: string }) => {
             <button 
               type="button" 
               onClick={() => reset()}
-              className="btn btn-outline btn-ghost sm:w-1/3"
+              className="btn btn-outline btn-ghost text-lg hover:border-green-500 sm:w-1/3"
             >
               Limpiar
             </button>
