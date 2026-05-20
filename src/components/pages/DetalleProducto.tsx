@@ -42,7 +42,11 @@ const DetalleProducto = () => {
 
   return (
     <div className="min-h-screen bg-[#0b0c10] text-gray-200 font-sans p-6 md:p-12">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-7xl mx-auto">
+
+      <div className="flex flex-col gap-8 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            
+        
         {/* Imagen */}
         <div className="bg-[#111318] border border-gray-800 rounded-xl p-8 flex items-center justify-center min-h-125">
           <img
@@ -108,16 +112,17 @@ const DetalleProducto = () => {
             </div>
           </div>
         </div>
+      </div>
+      </div>
         {/* Descripción del producto */}
-        <div className="bg-[#111318] border border-gray-800 rounded-xl p-8">
+        <div className="bg-[#111318] border border-gray-800 rounded-xl p-8 mt-8">
           <h2 className="text-2xl font-semibold text-white mb-4">
-            Descripción del producto
+            Descripción
           </h2>
           <p className="text-gray-400 leading-relaxed">
             {producto.descripcion}
           </p>
         </div>
-      </div>
     </div>
   );
 };
