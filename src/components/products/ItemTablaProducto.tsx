@@ -1,5 +1,6 @@
 import { type Producto } from "../../interfaces/productos";
 import { useAppContext } from "../../context/AppContext";
+import { Link } from "react-router";
 interface Props {
   producto: Producto;
 }
@@ -8,10 +9,7 @@ const ItemTablaProducto = ({ producto }: Props) => {
   const { eliminarProducto } = useAppContext();
   return (
     <tr className="border-b border-gray-800 hover:bg-[#151515] transition-all">
-
-      <td className="px-6 py-5 text-gray-300">
-        {producto.id.slice(0, 5)}
-      </td>
+      <td className="px-6 py-5 text-gray-300">{producto.id.slice(0, 5)}</td>
 
       <td className="px-6 py-5">
         <img
@@ -21,13 +19,9 @@ const ItemTablaProducto = ({ producto }: Props) => {
         />
       </td>
 
-      <td className="px-6 py-5 font-medium">
-        {producto.nombreProducto}
-      </td>
+      <td className="px-6 py-5 font-medium">{producto.nombreProducto}</td>
 
-      <td className="px-6 py-5 text-gray-400">
-        {producto.categoria}
-      </td>
+      <td className="px-6 py-5 text-gray-400">{producto.categoria}</td>
 
       <td className="px-6 py-5 text-green-500 font-semibold">
         ${Number(producto.precio).toLocaleString("es-AR")}
@@ -41,23 +35,21 @@ const ItemTablaProducto = ({ producto }: Props) => {
 
       <td className="px-6 py-5">
         <div className="flex items-center justify-center gap-3">
-
-          <button
+          <Link
+            to={`/administrador/editar/${producto.id}`}
             className="bg-blue-500/10 hover:bg-blue-500/20 text-blue-400 px-4 py-2 rounded-xl transition-all"
           >
             Editar
-          </button>
+          </Link>
 
           <button
-          onClick={() => eliminarProducto(producto.id)}
+            onClick={() => eliminarProducto(producto.id)}
             className="bg-red-500/10 hover:bg-red-500/20 text-red-400 px-4 py-2 rounded-xl transition-all"
           >
             Eliminar
           </button>
-
         </div>
       </td>
-
     </tr>
   );
 };
