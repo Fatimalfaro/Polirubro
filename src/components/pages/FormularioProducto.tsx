@@ -1,10 +1,20 @@
 import { useForm } from "react-hook-form";
+import { useEffect } from "react";
+import { useParams, useNavigate } from "react-router";
 import { type Producto, type ProductoFormData } from "../../interfaces/productos";
 import Swal from "sweetalert2";
 import { useAppContext } from "../../context/AppContext";
 
-const FormularioProducto = () => {
-  const { crearProducto } = useAppContext();
+const FormularioProducto = ({ titulo }: { titulo: string }) => {
+
+  const { id } = useParams();
+  const navigate = useNavigate();
+
+  const {
+    crearProducto,
+    editarProducto,
+    productos
+  } = useAppContext();
   // 1. PRIMERO inicializamos el useForm para que esté disponible en todo el componente
   const {
     register,
@@ -13,26 +23,52 @@ const FormularioProducto = () => {
     reset
   } = useForm<ProductoFormData>();
 
+  useEffect(() => {
+  if (id) {
+    const productoEncontrado = productos.find(
+      (producto) => producto.id === id
+    );
+
+    if (productoEncontrado) {
+      reset(productoEncontrado);
+    }
+  }
+}, [id, productos, reset]);
 
   // 2. SEGUNDO definimos la función que maneja el envío usando el nombre correcto
   const onSubmit = (data: ProductoFormData) => {
-    try {
+  try {
 
-    crearProducto({
-      ...data,
-      precio: Number(data.precio),
-      stock: Number(data.stock)
-    });
+    if (id) {
 
-    Swal.fire({
-      title: "¡Producto Creado!",
-      text: `El producto "${data.nombreProducto}" se guardó en el sistema.`,
-      icon: "success",
-      confirmButtonText: "Genial",
-      confirmButtonColor: "#16a34a",
-    });
+      editarProducto(id, data);
 
-    reset();
+      Swal.fire({
+        title: "¡Producto Editado!",
+        text: `El producto "${data.nombreProducto}" fue actualizado.`,
+        icon: "success",
+        confirmButtonColor: "#16a34a",
+      });
+
+    } else {
+
+      crearProducto({
+        ...data,
+        precio: Number(data.precio),
+        stock: Number(data.stock)
+      });
+
+      Swal.fire({
+        title: "¡Producto Creado!",
+        text: `El producto "${data.nombreProducto}" se guardó en el sistema.`,
+        icon: "success",
+        confirmButtonColor: "#16a34a",
+      });
+
+      reset();
+    }
+
+    navigate("/administrador");
 
   } catch (error) {
 
@@ -43,13 +79,13 @@ const FormularioProducto = () => {
     });
 
   }
-  };
+};
 
   return (
     <div className="min-h-screen bg-base-200 py-10 px-4">
       <div className="max-w-3xl mx-auto bg-base-100 shadow-2xl rounded-3xl p-8 border border-base-300">
         <h2 className="text-3xl font-extrabold text-center mb-8 text-green-800 uppercase tracking-tight">
-          Nuevo Producto
+          {titulo}
         </h2>
 
         
@@ -160,7 +196,7 @@ const FormularioProducto = () => {
           {/* Botones de acción */}
           <div className="flex flex-col sm:flex-row gap-4 mt-8">
             <button type="submit" className="btn bg-green-600 hover:bg-green-700 border-none flex-1 shadow-lg text-black font-bold">
-              Crear Producto
+              {id ? "Guardar Cambios" : "Crear Producto"}
             </button>
             <button 
               type="button" 

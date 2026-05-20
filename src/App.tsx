@@ -15,61 +15,80 @@ import type { Producto, ProductoFormData } from "./interfaces/productos";
 import DetalleProducto from "./components/pages/DetalleProducto";
 
 function App() {
- const usuarioSessionStorage = JSON.parse(
-  sessionStorage.getItem("usuarioKey") || "null"
-);
-
-  const [usuario, setUsuario] = useState<string | null>(
-    usuarioSessionStorage,
+  const usuarioSessionStorage = JSON.parse(
+    sessionStorage.getItem("usuarioKey") || "null",
   );
 
-  const productosLocalStorage = JSON.parse(localStorage.getItem('productosKey') || "[]");
-  const [productos, setProductos] = useState<Producto[]>(productosLocalStorage)
+  const [usuario, setUsuario] = useState<string | null>(usuarioSessionStorage);
+
+  const productosLocalStorage = JSON.parse(
+    localStorage.getItem("productosKey") || "[]",
+  );
+  const [productos, setProductos] = useState<Producto[]>(productosLocalStorage);
 
   const carritoLocalStorage = JSON.parse(
-  localStorage.getItem("carritoKey") || "[]"
-);
+    localStorage.getItem("carritoKey") || "[]",
+  );
 
-const [carrito, setCarrito] = useState<Producto[]>(carritoLocalStorage);
-
+  const [carrito, setCarrito] = useState<Producto[]>(carritoLocalStorage);
 
   useEffect(() => {
     sessionStorage.setItem("usuarioKey", JSON.stringify(usuario));
   }, [usuario]);
 
+  useEffect(() => {
+    localStorage.setItem("productosKey", JSON.stringify(productos));
+  }, [productos]);
 
-   useEffect(() => {
-    localStorage.setItem('productosKey', JSON.stringify(productos));
-  },[productos]);
-  
-  
-useEffect(() => {
-  localStorage.setItem("carritoKey", JSON.stringify(carrito));
-}, [carrito]);
-
-
+  useEffect(() => {
+    localStorage.setItem("carritoKey", JSON.stringify(carrito));
+  }, [carrito]);
 
   const crearProducto = (dataProducto: ProductoFormData) => {
     const productoNuevo: Producto = {
       ...dataProducto,
-      id: crypto.randomUUID()
+      id: crypto.randomUUID(),
     };
     setProductos([...productos, productoNuevo]);
+  };
 
-  }
+  const editarProducto = (id: string, productoEditado: ProductoFormData) => {
+    setProductos(
+      productos.map((producto) =>
+        producto.id === id
+          ? {
+              ...producto,
+              ...productoEditado,
+              precio: Number(productoEditado.precio),
+              stock: Number(productoEditado.stock),
+            }
+          : producto,
+      ),
+    );
+  };
 
   const agregarAlCarrito = (producto: Producto) => {
-  setCarrito([...carrito, producto]);
-};
+    setCarrito([...carrito, producto]);
+  };
 
   return (
-    <AppContext.Provider value={{ usuario, setUsuario, productos, crearProducto, carrito, agregarAlCarrito}}>
+    <AppContext.Provider
+      value={{
+        usuario,
+        setUsuario,
+        productos,
+        crearProducto,
+        editarProducto,
+        carrito,
+        agregarAlCarrito,
+      }}
+    >
       <BrowserRouter>
         <Navbar></Navbar>
         <main className="grow">
           <Routes>
             <Route path="/" element={<Inicio />}></Route>
-            <Route path="/producto/:id" element={<DetalleProducto/>}></Route>
+            <Route path="/producto/:id" element={<DetalleProducto />}></Route>
             <Route path="/administrador" element={<ProtectorRutas />}>
               <Route index element={<Administrador />}></Route>
               <Route
@@ -98,9 +117,6 @@ useEffect(() => {
         <Footer></Footer>
       </BrowserRouter>
     </AppContext.Provider>
-  
-
-    
   );
 }
 
