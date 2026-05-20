@@ -2,6 +2,7 @@ import { FiMinus, FiPlus, FiShoppingCart, FiTrash2 } from "react-icons/fi";
 import { LuShieldCheck, LuTruck, LuHeadphones } from "react-icons/lu";
 import { useAppContext } from "../../context/AppContext";
 import { Link } from "react-router";
+import Swal from "sweetalert2";
 
 const Carrito = () => {
   const { carrito, eliminarDelCarrito } = useAppContext();
@@ -68,7 +69,7 @@ const Carrito = () => {
                 </div>
 
                 <div>
-                  <span className="px-4 font-medium">${producto.cantidad}</span>
+                  <span className="px-4 font-medium">{producto.cantidad}</span>
                 </div>
 
                 <div className="flex items-center justify-between">
@@ -121,10 +122,22 @@ const Carrito = () => {
                   ${total}
                 </span>
               </div>
-
-              <button className="w-full mt-8 bg-green-600 hover:bg-green-500 transition-all text-white font-semibold py-4 rounded-xl shadow-lg shadow-green-500/20">
-                Finalizar compra
-              </button>
+<button
+  onClick={() =>
+    Swal.fire({
+      title: "¡Gracias por tu compra!",
+      text: "Tu pedido fue realizado correctamente.",
+      icon: "success",
+      confirmButtonText: "Aceptar",
+      background: "#18181b",
+      color: "#fff",
+      confirmButtonColor: "#16a34a",
+    })
+  }
+  className="w-full mt-8 bg-green-600 hover:bg-green-500 transition-all text-white font-semibold py-4 rounded-xl shadow-lg shadow-green-500/20"
+>
+  Finalizar compra
+</button>
 
               <p className="text-center text-sm text-zinc-500 mt-4">
                 Compra 100% segura
