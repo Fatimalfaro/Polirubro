@@ -26,6 +26,12 @@ function App() {
   const productosLocalStorage = JSON.parse(localStorage.getItem('productosKey') || "[]");
   const [productos, setProductos] = useState<Producto[]>(productosLocalStorage)
 
+  const carritoLocalStorage = JSON.parse(
+  localStorage.getItem("carritoKey") || "[]"
+);
+
+const [carrito, setCarrito] = useState<Producto[]>(carritoLocalStorage);
+
 
   useEffect(() => {
     sessionStorage.setItem("usuarioKey", JSON.stringify(usuario));
@@ -35,6 +41,12 @@ function App() {
    useEffect(() => {
     localStorage.setItem('productosKey', JSON.stringify(productos));
   },[productos]);
+  
+  
+useEffect(() => {
+  localStorage.setItem("carritoKey", JSON.stringify(carrito));
+}, [carrito]);
+
 
 
   const crearProducto = (dataProducto: ProductoFormData) => {
@@ -46,7 +58,46 @@ function App() {
 
   }
 
+  const agregarAlCarrito = (producto: Producto) => {
+  setCarrito([...carrito, producto]);
+};
+
   return (
+    <AppContext.Provider value={{ usuario, setUsuario, productos, crearProducto, carrito, agregarAlCarrito}}>
+      <BrowserRouter>
+        <Navbar></Navbar>
+        <main>
+          <Routes>
+            <Route path="/" element={<Inicio />}></Route>
+            <Route path="/catalogo" element={<Catalogo />}></Route>
+            <Route path="/administrador" element={<ProtectorRutas />}>
+              <Route index element={<Administrador />}></Route>
+              <Route
+                path="crear"
+                element={
+                  <FormularioProducto
+                    titulo={"Crear Servicio"}
+                  ></FormularioProducto>
+                }
+              />
+              <Route
+                path="editar/:id"
+                element={
+                  <FormularioProducto
+                    titulo={"Editar Servicio"}
+                  ></FormularioProducto>
+                }
+              />
+            </Route>
+            <Route path="/carrito" element={<Carrito />}></Route>
+            <Route path="/login" element={<Login />}></Route>
+            <Route path="/nosotros" element={<Nosotros />}></Route>
+            <Route path="*" element={<Error404 />}></Route>
+          </Routes>
+        </main>
+        <Footer></Footer>
+      </BrowserRouter>
+    </AppContext.Provider>
   <BrowserRouter>
   <div className="flex flex-col min-h-screen" >
       <Navbar></Navbar>
