@@ -15,107 +15,81 @@ import type { Producto, ProductoFormData, ProductoCarrito } from "./interfaces/p
 import DetalleProducto from "./components/pages/DetalleProducto";
 
 function App() {
- const usuarioSessionStorage = JSON.parse(
-  sessionStorage.getItem("usuarioKey") || "null"
-);
-
-  const [usuario, setUsuario] = useState<string | null>(
-    usuarioSessionStorage,
+  const usuarioSessionStorage = JSON.parse(
+    sessionStorage.getItem("usuarioKey") || "null",
   );
 
-  const productosLocalStorage = JSON.parse(localStorage.getItem('productosKey') || "[]");
-  const [productos, setProductos] = useState<Producto[]>(productosLocalStorage)
+  const [usuario, setUsuario] = useState<string | null>(usuarioSessionStorage);
 
-  const carritoLocalStorage = JSON.parse(
-  localStorage.getItem("carritoKey") || "[]"
-);
+  const productosLocalStorage = JSON.parse(
+    localStorage.getItem("productosKey") || "[]",
+  );
+  const [productos, setProductos] = useState<Producto[]>(productosLocalStorage);
 
 const [carrito, setCarrito] = useState<ProductoCarrito[]>(carritoLocalStorage);
+  const carritoLocalStorage = JSON.parse(
+    localStorage.getItem("carritoKey") || "[]",
+  );
 
+  const [carrito, setCarrito] = useState<Producto[]>(carritoLocalStorage);
 
   useEffect(() => {
     sessionStorage.setItem("usuarioKey", JSON.stringify(usuario));
   }, [usuario]);
 
+  useEffect(() => {
+    localStorage.setItem("productosKey", JSON.stringify(productos));
+  }, [productos]);
 
-   useEffect(() => {
-    localStorage.setItem('productosKey', JSON.stringify(productos));
-  },[productos]);
-  
-  
-useEffect(() => {
-  localStorage.setItem("carritoKey", JSON.stringify(carrito));
-}, [carrito]);
-
-
+  useEffect(() => {
+    localStorage.setItem("carritoKey", JSON.stringify(carrito));
+  }, [carrito]);
 
   const crearProducto = (dataProducto: ProductoFormData) => {
     const productoNuevo: Producto = {
       ...dataProducto,
-      id: crypto.randomUUID()
+      id: crypto.randomUUID(),
     };
     setProductos([...productos, productoNuevo]);
+  };
 
-  }
-
-  const agregarAlCarrito = (producto: Producto, cantidad: number) => {
-
-  const productoExistente = carrito.find(
-    (item) => item.id === producto.id
-  );
-
-  if (productoExistente) {
-
-    const carritoActualizado = carrito.map((item) =>
-      item.id === producto.id
-        ? {
-            ...item,
-            cantidad: (item.cantidad || 1) + cantidad
-          }
-        : item
+  const editarProducto = (id: string, productoEditado: ProductoFormData) => {
+    setProductos(
+      productos.map((producto) =>
+        producto.id === id
+          ? {
+              ...producto,
+              ...productoEditado,
+              precio: Number(productoEditado.precio),
+              stock: Number(productoEditado.stock),
+            }
+          : producto,
+      ),
     );
+  };
 
-    setCarrito(carritoActualizado);
-
-  } else {
-
-    setCarrito([
-      ...carrito,
-      {
-        ...producto,
-        cantidad
-      }
-    ]);
-
-  }
-};
-
-const eliminarDelCarrito = (id: string) => {
-
-  const carritoFiltrado = carrito.filter(
-    (producto) => producto.id !== id
-  );
-
-  setCarrito(carritoFiltrado);
-};
- 
-const eliminarProducto = (id: string) => {
-
-  const productosFiltrados = productos.filter(
-    (producto) => producto.id !== id
-  );
-
-  setProductos(productosFiltrados);
-};
+  const agregarAlCarrito = (producto: Producto) => {
+    setCarrito([...carrito, producto]);
+  };
 
   return (
-    <AppContext.Provider value={{ usuario, setUsuario, productos, crearProducto, carrito, agregarAlCarrito, eliminarDelCarrito,  eliminarProducto,}}>
+    <AppContext.Provider
+      value={{
+        usuario,
+        setUsuario,
+        productos,
+        crearProducto,
+        editarProducto,
+        carrito,
+        agregarAlCarrito,
+      }}
+    >
       <BrowserRouter>
         <Navbar></Navbar>
         <main className="grow">
           <Routes>
             <Route path="/" element={<Inicio />}></Route>
-            <Route path="/producto/:id" element={<DetalleProducto/>}></Route>
+            <Route path="/producto/:id" element={<DetalleProducto />}></Route>
             <Route path="/administrador" element={<ProtectorRutas />}>
               <Route index element={<Administrador />}></Route>
               <Route
@@ -144,9 +118,6 @@ const eliminarProducto = (id: string) => {
         <Footer></Footer>
       </BrowserRouter>
     </AppContext.Provider>
-  
-
-    
   );
 }
 

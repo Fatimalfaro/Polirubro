@@ -21,12 +21,15 @@ const CardProducto = ({ producto }: Props) => {
         </span>
       </div>
 
-      <div className="p-5 flex flex-col flex-grow bg-zinc-950">
+      
+      <div className="p-5 flex flex-col grow bg-zinc-950">
+      
         <h3 className="text-lg font-bold text-green-500 mb-2 truncate tracking-tight">
           {producto.nombreProducto}
         </h3>
-
-        <p className="text-zinc-400 text-sm line-clamp-2 mb-5 flex-grow font-medium">
+        
+       
+        <p className="text-zinc-400 text-sm line-clamp-2 mb-5 grow font-medium">
           {producto.descripcion}
         </p>
 

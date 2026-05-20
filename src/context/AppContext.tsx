@@ -6,6 +6,7 @@ export interface AppContextType{
     setUsuario: React.Dispatch<React.SetStateAction<string | null>>;
     productos : Producto[];
     crearProducto: (nuevoProducto:ProductoFormData) => void;
+    editarProducto: (id: string, producto: ProductoFormData) => void;
     carrito: Producto[];
     agregarAlCarrito: (producto: Producto) => void;
     eliminarDelCarrito: (id: string) => void;
