@@ -1,7 +1,6 @@
 import Navbar from "./components/shared/Navbar";
 import Footer from "./components/shared/Footer";
 import Inicio from "./components/pages/Inicio";
-import Catalogo from "./components/pages/Catalogo";
 import Carrito from "./components/pages/Carrito";
 import Error404 from "./components/pages/Error404";
 import Login from "./components/pages/Login";
@@ -98,6 +97,7 @@ useEffect(() => {
         <Footer></Footer>
       </BrowserRouter>
     </AppContext.Provider>
+  
 
     
   );
