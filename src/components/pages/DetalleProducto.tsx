@@ -43,7 +43,6 @@ const DetalleProducto = () => {
   return (
     <div className="min-h-screen bg-[#0b0c10] text-gray-200 font-sans p-6 md:p-12">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-7xl mx-auto">
-        
         {/* Imagen */}
         <div className="bg-[#111318] border border-gray-800 rounded-xl p-8 flex items-center justify-center min-h-100">
           <img
@@ -55,7 +54,6 @@ const DetalleProducto = () => {
 
         {/* Detalles */}
         <div className="bg-[#111318] border border-gray-800 rounded-xl p-8 flex flex-col">
-          
           <h1 className="text-3xl font-bold text-white mb-3">
             {producto.nombreProducto}
           </h1>
@@ -70,24 +68,16 @@ const DetalleProducto = () => {
             Stock disponible: {producto.stock} unidades
           </div>
 
-          <p className="text-gray-400 text-sm leading-relaxed mb-8">
-            {producto.descripcion}
-          </p>
-
           <div className="text-4xl font-bold text-white mb-8">
             ${producto.precio}
           </div>
 
           <div className="mt-auto">
-            <div className="mb-2 text-sm text-gray-400">
-              Cantidad
-            </div>
+            <div className="mb-2 text-sm text-gray-400">Cantidad</div>
 
             <div className="flex flex-col sm:flex-row gap-4">
-              
               {/* Selector cantidad */}
               <div className="flex items-center justify-between border border-gray-700 rounded-lg px-4 py-3 bg-[#0b0c10] w-full sm:w-32">
-                
                 <button
                   onClick={handleDecrementaCantidad}
                   className="text-gray-400 hover:text-white transition-colors"
@@ -96,9 +86,7 @@ const DetalleProducto = () => {
                   <FiMinus size={18} />
                 </button>
 
-                <span className="text-white font-medium">
-                  {cantidad}
-                </span>
+                <span className="text-white font-medium">{cantidad}</span>
 
                 <button
                   onClick={handleIncrementaCantidad}
@@ -119,6 +107,15 @@ const DetalleProducto = () => {
               </button>
             </div>
           </div>
+        </div>
+        {/* Descripción del producto */}
+        <div className="bg-[#111318] border border-gray-800 rounded-xl p-8">
+          <h2 className="text-2xl font-semibold text-white mb-4">
+            Descripción del producto
+          </h2>
+          <p className="text-gray-400 leading-relaxed">
+            {producto.descripcion}
+          </p>
         </div>
       </div>
     </div>
