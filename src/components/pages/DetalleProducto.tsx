@@ -44,7 +44,7 @@ const DetalleProducto = () => {
     <div className="min-h-screen bg-[#0b0c10] text-gray-200 font-sans p-6 md:p-12">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-7xl mx-auto">
         {/* Imagen */}
-        <div className="bg-[#111318] border border-gray-800 rounded-xl p-8 flex items-center justify-center min-h-100">
+        <div className="bg-[#111318] border border-gray-800 rounded-xl p-8 flex items-center justify-center min-h-125">
           <img
             src={producto.imagen}
             alt={producto.nombreProducto}
