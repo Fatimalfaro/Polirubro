@@ -1,6 +1,9 @@
-import ItemTablaProducto from "../products/ItemTablaProducto";
+import <ItemTablaProducto></ItemTablaProducto> from "../products/ItemTablaProducto";
+import { useAppContext } from "../../context/AppContext";
 
 const Administrador = () => {
+  const { productos } = useAppContext();
+
   return (
     <main className="min-h-screen bg-black text-white px-4 py-10">
       <section className="max-w-7xl mx-auto">
@@ -58,8 +61,13 @@ const Administrador = () => {
 
               {/* BODY */}
               <tbody>
-                <ItemTablaProducto />
-
+                {productos.map((producto, index) => (
+                  <ItemTablaProducto
+                    key={producto.id}
+                    producto={producto}
+                    fila={index + 1}
+                  />
+                ))}
               </tbody>
             </table>
           </div>
