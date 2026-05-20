@@ -19,11 +19,15 @@ const Inicio = () => {
   }, []);
 
   
-  const productosFiltrados = productos.filter(p => 
-    p.nombreProducto.toLowerCase().includes(busqueda.toLowerCase()) ||
-    p.descripcion.toLowerCase().includes(busqueda.toLowerCase())
-  );
+  const productosFiltrados = productos.filter((p) =>
+  (p.nombreProducto || "")
+    .toLowerCase()
+    .includes(busqueda.toLowerCase()) ||
 
+  (p.descripcion || "")
+    .toLowerCase()
+    .includes(busqueda.toLowerCase())
+);
 
   const todosOfertas = productosFiltrados.filter(p => p.categoria === 'Ofertas Mundialistas');
   const todosElectro = productosFiltrados.filter(p => p.categoria === 'Electro');

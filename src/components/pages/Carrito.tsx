@@ -1,16 +1,14 @@
 import { FiMinus, FiPlus, FiShoppingCart, FiTrash2 } from "react-icons/fi";
 import { LuShieldCheck, LuTruck, LuHeadphones } from "react-icons/lu";
 import { useAppContext } from "../../context/AppContext";
+import { Link } from "react-router";
 
 const Carrito = () => {
-  const { carrito } = useAppContext();
+  const { carrito, eliminarDelCarrito } = useAppContext();
 
   const total = carrito.reduce((acc, producto) => {
-  return acc + producto.precio;
+  return acc + producto.precio * producto.cantidad;
 }, 0);
-
-
-
 
   return (
     <section className="min-h-screen bg-black text-white px-4 py-10">
@@ -70,27 +68,30 @@ const Carrito = () => {
                 </div>
 
                 <div>
-                  <span className="px-4 font-medium">1</span>
+                  <span className="px-4 font-medium">${producto.cantidad}</span>
                 </div>
 
                 <div className="flex items-center justify-between">
                   <p className="text-2xl font-bold text-green-500">
-                    ${producto.precio}
+                    ${producto.precio*producto.cantidad}
                   </p>
-
-                  <button className="text-zinc-400 hover:text-red-500 transition-all ml-4">
+                  <button
+                    onClick={() => eliminarDelCarrito(producto.id)}
+                    className="text-zinc-400 hover:text-red-500 transition-all ml-4"
+                  >
                     <FiTrash2 size={22} />
                   </button>
                 </div>
               </div>
             ))}
 
-            
-
             <div className="mt-8">
-              <button className="border border-zinc-700 hover:border-green-500 text-green-500 px-6 py-3 rounded-xl transition-all">
+              <Link
+                to="/"
+                className="inline-block border border-zinc-700 hover:border-green-500 text-green-500 px-6 py-3 rounded-xl transition-all"
+              >
                 ← Seguir comprando
-              </button>
+              </Link>
             </div>
           </div>
 
@@ -107,7 +108,9 @@ const Carrito = () => {
               <div className="space-y-4 border-b border-zinc-800 pb-6">
                 <div className="flex justify-between text-zinc-300">
                   <span>Subtotal</span>
-                  <span>({carrito.length} productos)</span>
+                  <span>(
+  {carrito.reduce((acc, producto) => acc + producto.cantidad, 0)}
+  {" "}productos)</span>
                 </div>
               </div>
 

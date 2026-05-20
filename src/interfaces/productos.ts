@@ -12,4 +12,9 @@ export interface Producto
     descripcion: string;
     stock: number;
 }
+
+export interface ProductoCarrito extends Producto {
+  cantidad: number;
+}
+
 export type ProductoFormData = Omit<Producto, 'id'>;

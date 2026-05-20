@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { useParams } from "react-router";
+import { useParams, useNavigate } from "react-router";
 import { FiShoppingCart, FiMinus, FiPlus } from "react-icons/fi";
 
 import { useAppContext } from "../../context/AppContext";
 
 const DetalleProducto = () => {
   const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
 
   const { productos, agregarAlCarrito } = useAppContext();
 
@@ -37,7 +38,8 @@ const DetalleProducto = () => {
   };
 
   const handleAgregarCarrito = () => {
-    agregarAlCarrito(producto);
+    agregarAlCarrito(producto, cantidad);
+    navigate("/carrito");
   };
 
   return (

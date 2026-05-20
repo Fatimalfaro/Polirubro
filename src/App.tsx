@@ -11,7 +11,7 @@ import { BrowserRouter, Routes, Route } from "react-router";
 import ProtectorRutas from "./components/routes/ProtectorRutas";
 import { useEffect, useState } from "react";
 import { AppContext } from "./context/AppContext";
-import type { Producto, ProductoFormData } from "./interfaces/productos";
+import type { Producto, ProductoFormData, ProductoCarrito } from "./interfaces/productos";
 import DetalleProducto from "./components/pages/DetalleProducto";
 
 function App() {
@@ -30,7 +30,7 @@ function App() {
   localStorage.getItem("carritoKey") || "[]"
 );
 
-const [carrito, setCarrito] = useState<Producto[]>(carritoLocalStorage);
+const [carrito, setCarrito] = useState<ProductoCarrito[]>(carritoLocalStorage);
 
 
   useEffect(() => {
@@ -58,12 +58,49 @@ useEffect(() => {
 
   }
 
-  const agregarAlCarrito = (producto: Producto) => {
-  setCarrito([...carrito, producto]);
+  const agregarAlCarrito = (producto: Producto, cantidad: number) => {
+
+  const productoExistente = carrito.find(
+    (item) => item.id === producto.id
+  );
+
+  if (productoExistente) {
+
+    const carritoActualizado = carrito.map((item) =>
+      item.id === producto.id
+        ? {
+            ...item,
+            cantidad: (item.cantidad || 1) + cantidad
+          }
+        : item
+    );
+
+    setCarrito(carritoActualizado);
+
+  } else {
+
+    setCarrito([
+      ...carrito,
+      {
+        ...producto,
+        cantidad
+      }
+    ]);
+
+  }
+};
+
+const eliminarDelCarrito = (id: string) => {
+
+  const carritoFiltrado = carrito.filter(
+    (producto) => producto.id !== id
+  );
+
+  setCarrito(carritoFiltrado);
 };
 
   return (
-    <AppContext.Provider value={{ usuario, setUsuario, productos, crearProducto, carrito, agregarAlCarrito}}>
+    <AppContext.Provider value={{ usuario, setUsuario, productos, crearProducto, carrito, agregarAlCarrito, eliminarDelCarrito}}>
       <BrowserRouter>
         <Navbar></Navbar>
         <main className="grow">
