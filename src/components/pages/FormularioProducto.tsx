@@ -1,8 +1,10 @@
 import { useForm } from "react-hook-form";
 import { type Producto, type ProductoFormData } from "../../interfaces/productos";
 import Swal from "sweetalert2";
+import { useAppContext } from "../../context/AppContext";
 
 const FormularioProducto = () => {
+  const { crearProducto } = useAppContext();
   // 1. PRIMERO inicializamos el useForm para que esté disponible en todo el componente
   const {
     register,
@@ -10,6 +12,7 @@ const FormularioProducto = () => {
     formState: { errors },
     reset
   } = useForm<ProductoFormData>();
+
 
   // 2. SEGUNDO definimos la función que maneja el envío usando el nombre correcto
   const onSubmit = (data: ProductoFormData) => {
