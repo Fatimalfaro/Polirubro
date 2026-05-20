@@ -1,42 +1,44 @@
-const ItemTablaProducto = () => {
-    return (
-        <tr className="border-b border-gray-800 hover:bg-[#151515] transition-all">
-     
+import { type Producto } from "../../interfaces/productos";
+
+interface Props {
+  producto: Producto;
+}
+
+const ItemTablaProducto = ({ producto }: Props) => {
+  return (
+    <tr className="border-b border-gray-800 hover:bg-[#151515] transition-all">
+
       <td className="px-6 py-5 text-gray-300">
-        #001
+        {producto.id.slice(0, 5)}
       </td>
 
       <td className="px-6 py-5">
-
         <img
-          alt="Producto"
+          src={producto.imagen}
+          alt={producto.nombreProducto}
           className="w-16 h-16 object-cover rounded-xl border border-gray-700"
         />
-
       </td>
 
       <td className="px-6 py-5 font-medium">
-        Auriculares Gamer
+        {producto.nombreProducto}
       </td>
 
       <td className="px-6 py-5 text-gray-400">
-        Tecnología
+        {producto.categoria}
       </td>
 
       <td className="px-6 py-5 text-green-500 font-semibold">
-        $25.000
+        ${producto.precio.toLocaleString("es-AR")}
       </td>
 
       <td className="px-6 py-5">
-
         <span className="bg-green-500/10 text-green-500 px-4 py-2 rounded-full text-sm">
-          12 unidades
+          {producto.stock} unidades
         </span>
-
       </td>
 
       <td className="px-6 py-5">
-
         <div className="flex items-center justify-center gap-3">
 
           <button
@@ -53,8 +55,9 @@ const ItemTablaProducto = () => {
 
         </div>
       </td>
+
     </tr>
-    );
+  );
 };
 
 export default ItemTablaProducto;
