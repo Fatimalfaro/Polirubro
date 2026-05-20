@@ -98,9 +98,18 @@ const eliminarDelCarrito = (id: string) => {
 
   setCarrito(carritoFiltrado);
 };
+ 
+const eliminarProducto = (id: string) => {
+
+  const productosFiltrados = productos.filter(
+    (producto) => producto.id !== id
+  );
+
+  setProductos(productosFiltrados);
+};
 
   return (
-    <AppContext.Provider value={{ usuario, setUsuario, productos, crearProducto, carrito, agregarAlCarrito, eliminarDelCarrito}}>
+    <AppContext.Provider value={{ usuario, setUsuario, productos, crearProducto, carrito, agregarAlCarrito, eliminarDelCarrito,  eliminarProducto,}}>
       <BrowserRouter>
         <Navbar></Navbar>
         <main className="grow">
