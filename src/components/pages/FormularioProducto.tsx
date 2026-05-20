@@ -48,7 +48,7 @@ const FormularioProducto = () => {
   return (
     <div className="min-h-screen bg-base-200 py-10 px-4">
       <div className="max-w-3xl mx-auto bg-base-100 shadow-2xl rounded-3xl p-8 border border-base-300">
-        <h2 className="text-3xl font-extrabold text-center mb-8 text-green-800 uppercase tracking-tight">
+        <h2 className="text-3xl font-extrabold text-center mb-8 text-green-500 uppercase tracking-tight">
           Nuevo Producto
         </h2>
 
@@ -113,7 +113,7 @@ const FormularioProducto = () => {
             <input
               type="text"
               placeholder="https://ejemplo.com/foto.png"
-              className={`input input-bordered mr-1 ${errors.imagen ? 'input-error' : ''}`}
+              className={`input input-bordered mr-1 w-full ${errors.imagen ? 'input-error' : ''}`}
               {...register("imagen", { 
                 required: "La URL es obligatoria",
                 pattern: {
@@ -131,7 +131,7 @@ const FormularioProducto = () => {
               <span className="label-text font-bold text-green-500 mr-1">Descripción</span>
             </label>
             <textarea
-              className={`textarea textarea-bordered h-24 mr-1 ${errors.descripcion ? 'textarea-error' : ''}`}
+              className={`textarea textarea-bordered h-24 mr-1 w-full ${errors.descripcion ? 'textarea-error' : ''}`}
               placeholder="Escribe los detalles aquí..."
               {...register("descripcion", { 
                 required: "La descripción es necesaria",
@@ -159,13 +159,13 @@ const FormularioProducto = () => {
 
           {/* Botones de acción */}
           <div className="flex flex-col sm:flex-row gap-4 mt-8">
-            <button type="submit" className="btn bg-green-600 hover:bg-green-700 border-none flex-1 shadow-lg text-black font-bold">
+            <button type="submit" className="btn bg-green-500 hover:bg-green-700 border-none flex-1 shadow-lg text-gray-950 text-lg font-bold">
               Crear Producto
             </button>
             <button 
               type="button" 
               onClick={() => reset()}
-              className="btn btn-outline btn-ghost sm:w-1/3"
+              className="btn btn-outline btn-ghost text-lg hover:border-green-500 sm:w-1/3"
             >
               Limpiar
             </button>
