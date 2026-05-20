@@ -1,20 +1,51 @@
-import Navbar from "./components/shared/Navbar"
-import Footer from "./components/shared/Footer"
-import Inicio from "./components/pages/Inicio"
-import Catalogo from "./components/pages/Catalogo"
-import Carrito from "./components/pages/Carrito"
-import Error404 from "./components/pages/Error404"
-import Login from "./components/pages/Login"
-import Administrador from "./components/pages/Administrador"
-import FormularioProducto from "./components/pages/FormularioProducto"
-import Nosotros from "./components/pages/Nosotros"
-import { BrowserRouter, Routes, Route } from "react-router"
-import ProtectorRutas from "./components/routes/ProtectorRutas"
-
-
+import Navbar from "./components/shared/Navbar";
+import Footer from "./components/shared/Footer";
+import Inicio from "./components/pages/Inicio";
+import Catalogo from "./components/pages/Catalogo";
+import Carrito from "./components/pages/Carrito";
+import Error404 from "./components/pages/Error404";
+import Login from "./components/pages/Login";
+import Administrador from "./components/pages/Administrador";
+import FormularioProducto from "./components/pages/FormularioProducto";
+import Nosotros from "./components/pages/Nosotros";
+import { BrowserRouter, Routes, Route } from "react-router";
+import ProtectorRutas from "./components/routes/ProtectorRutas";
+import { useEffect, useState } from "react";
+import { AppContext } from "./context/AppContext";
+import type { Producto, ProductoFormData } from "./interfaces/productos";
 
 function App() {
-  
+  const usuarioSessionStorage = JSON.parse(
+    sessionStorage.getItem("usuarioKey") || "false",
+  );
+
+  const [usuario, setUsuario] = useState<string | null>(
+    usuarioSessionStorage,
+  );
+
+  const productosLocalStorage = JSON.parse(localStorage.getItem('productosKey') || "[]");
+  const [productos, setProductos] = useState<Producto[]>(productosLocalStorage)
+
+
+  useEffect(() => {
+    sessionStorage.setItem("usuarioKey", JSON.stringify(usuario));
+  }, [usuario]);
+
+
+   useEffect(() => {
+    localStorage.setItem('productosKey', JSON.stringify(productos));
+  },[productos]);
+
+
+  const crearProducto = (dataProducto: ProductoFormData) => {
+    const productoNuevo: Producto = {
+      ...dataProducto,
+      id: crypto.randomUUID()
+    };
+    setProductos([...productos, productoNuevo]);
+
+  }
+
   return (
   <BrowserRouter>
   <div className="flex flex-col min-h-screen" >
@@ -45,4 +76,4 @@ function App() {
   );
 }
 
-export default App
+export default App;
