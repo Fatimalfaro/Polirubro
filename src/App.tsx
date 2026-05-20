@@ -47,41 +47,32 @@ function App() {
   }
 
   return (
-    <AppContext.Provider value={{ usuario, setUsuario, productos, crearProducto}}>
-      <BrowserRouter>
-        <Navbar></Navbar>
-        <main>
-          <Routes>
-            <Route path="/" element={<Inicio />}></Route>
-            <Route path="/catalogo" element={<Catalogo />}></Route>
-            <Route path="/administrador" element={<ProtectorRutas />}>
-              <Route index element={<Administrador />}></Route>
-              <Route
-                path="crear"
-                element={
-                  <FormularioProducto
-                    titulo={"Crear Servicio"}
-                  ></FormularioProducto>
-                }
-              />
-              <Route
-                path="editar/:id"
-                element={
-                  <FormularioProducto
-                    titulo={"Editar Servicio"}
-                  ></FormularioProducto>
-                }
-              />
-            </Route>
-            <Route path="/carrito" element={<Carrito />}></Route>
-            <Route path="/login" element={<Login />}></Route>
-            <Route path="/nosotros" element={<Nosotros />}></Route>
-            <Route path="*" element={<Error404 />}></Route>
-          </Routes>
-        </main>
-        <Footer></Footer>
-      </BrowserRouter>
-    </AppContext.Provider>
+  <BrowserRouter>
+  <div className="flex flex-col min-h-screen" >
+      <Navbar></Navbar>
+    <main className="grow container mx-auto my-4 px-4 py-8" >
+    <Routes>
+        <Route path="/" element={<Inicio/>}></Route>
+        <Route path="/catalogo" element={<Catalogo/>}></Route>
+        <Route path="/administrador" element={<ProtectorRutas/>}>
+          <Route index element={<Administrador/>}></Route>
+          <Route path="crear" element={<FormularioProducto titulo={'Crear Servicio'}></FormularioProducto>}/>
+          <Route path="editar/:id" element={<FormularioProducto titulo={'Editar Servicio'}></FormularioProducto>}/>
+        </Route>
+        <Route path="/carrito" element={<Carrito/>}></Route>
+        <Route path="/login" element={<Login/>}></Route>
+        <Route path="/nosotros" element={<Nosotros/>}></Route>
+        <Route path="*" element={<Error404/>}></Route>
+
+
+    </Routes>
+    </main>
+    <Footer></Footer>
+  </div>
+  
+  </BrowserRouter>
+
+    
   );
 }
 
