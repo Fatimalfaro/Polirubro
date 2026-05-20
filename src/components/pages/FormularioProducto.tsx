@@ -17,22 +17,13 @@ const FormularioProducto = () => {
   // 2. SEGUNDO definimos la función que maneja el envío usando el nombre correcto
   const onSubmit = (data: ProductoFormData) => {
     try {
-    // 1. Obtener lo que ya existe en LocalStorage (si no hay nada, inicializa un array vacío)
-    const productosGuardados = localStorage.getItem("productos_proyecto");
-    const listaActual: Producto[] = productosGuardados ? JSON.parse(productosGuardados) : [];
 
-    // 2. Crear el objeto final combinando los datos del form, agregando ID y parseando números
-    const nuevoProducto: Producto = {
+    crearProducto({
       ...data,
-      id: crypto.randomUUID(), // Genera un ID único e irrepetible
-      precio: Number(data.precio), // Asegura que se guarde como número y no string
-      stock: Number(data.stock)    // Asegura que se guarde como número y no string
-    };
+      precio: Number(data.precio),
+      stock: Number(data.stock)
+    });
 
-    // 3. Guardar el nuevo array completo en LocalStorage
-    localStorage.setItem("productos_proyecto", JSON.stringify([...listaActual, nuevoProducto]));
-    
-    // 4. Mostrar feedback de éxito con SweetAlert2
     Swal.fire({
       title: "¡Producto Creado!",
       text: `El producto "${data.nombreProducto}" se guardó en el sistema.`,
@@ -41,16 +32,16 @@ const FormularioProducto = () => {
       confirmButtonColor: "#16a34a",
     });
 
-    // 5. Resetear los campos del formulario
     reset();
 
   } catch (error) {
-    console.error("Error al guardar en LocalStorage:", error);
+
     Swal.fire({
       title: "Error",
       text: "No se pudo guardar el producto.",
       icon: "error"
     });
+
   }
   };
 
