@@ -54,6 +54,7 @@ function App() {
     <Routes>
         <Route path="/" element={<Inicio/>}></Route>
         <Route path="/catalogo" element={<Catalogo/>}></Route>
+        <Route path="/catalogo/:nombreCategoria" element={<CategoriaDetalle />} />
         <Route path="/administrador" element={<ProtectorRutas/>}>
           <Route index element={<Administrador/>}></Route>
           <Route path="crear" element={<FormularioProducto titulo={'Crear Servicio'}></FormularioProducto>}/>
