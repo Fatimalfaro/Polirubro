@@ -1,6 +1,10 @@
+import { Link } from "react-router";
+import { useAppContext } from "../../context/AppContext";
 import ItemTablaProducto from "../products/ItemTablaProducto";
 
 const Administrador = () => {
+  const { productos } = useAppContext();
+
   return (
     <main className="min-h-screen bg-black text-white px-4 py-10">
       <section className="max-w-7xl mx-auto">
@@ -15,9 +19,12 @@ const Administrador = () => {
             </p>
           </div>
 
-          <button className="bg-green-600 hover:bg-green-500 transition-all px-6 py-4 rounded-2xl font-semibold shadow-lg shadow-green-500/20">
+          <Link
+            to="/administrador/crear"
+            className="bg-green-600 hover:bg-green-500 transition-all px-6 py-4 rounded-2xl font-semibold shadow-lg shadow-green-500/20"
+          >
             + Agregar producto
-          </button>
+          </Link>
         </div>
 
         <div className="bg-[#0f0f0f] border border-green-500/10 rounded-3xl overflow-hidden shadow-2xl">
@@ -58,8 +65,9 @@ const Administrador = () => {
 
               {/* BODY */}
               <tbody>
-                <ItemTablaProducto />
-
+                {productos.map((producto) => (
+                  <ItemTablaProducto key={producto.id} producto={producto} />
+                ))}
               </tbody>
             </table>
           </div>
