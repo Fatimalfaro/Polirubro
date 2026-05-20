@@ -106,8 +106,8 @@ const Carrito = () => {
 
               <div className="space-y-4 border-b border-zinc-800 pb-6">
                 <div className="flex justify-between text-zinc-300">
-                  <span>Subtotal (7 productos)</span>
-                  <span>$149.920</span>
+                  <span>Subtotal</span>
+                  <span>({carrito.length} productos)</span>
                 </div>
               </div>
 
@@ -115,7 +115,7 @@ const Carrito = () => {
                 <span className="text-2xl font-bold">TOTAL</span>
 
                 <span className="text-4xl font-bold text-green-500">
-                  $154.910
+                  ${total}
                 </span>
               </div>
 
