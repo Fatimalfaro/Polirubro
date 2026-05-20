@@ -33,11 +33,6 @@ const Navbar = () => {
 
     navegacion("/carrito");
   };
-import { Link, NavLink } from "react-router";
-import { FiMenu, FiX, FiShoppingCart } from "react-icons/fi";
-
-const Navbar = () => {
-  const [isNavbarOpen, setIsNavbarOpen] = useState(false);
 
   const navLinkStyles = ({ isActive }: { isActive: boolean }) =>
     `block py-2 px-3 transition-colors duration-200 md:p-0 ${
@@ -64,16 +59,6 @@ const Navbar = () => {
               </button>
             </div>
           )}
-            <Link to={"/"}
-              className="btn btn-ghost text-green-500 text-2xl">
-              MULTICLICK
-            </Link>
-          </div>
-          <div className="text-xl ml-4">
-            <Link to={"/carrito"}>
-              <FiShoppingCart />
-            </Link>
-          </div>
 
           {/* Botón Hamburguesa (Celular) */}
           <div className="md:hidden ml-auto mt-1.5">
@@ -130,19 +115,11 @@ const Navbar = () => {
                   Login
                 </NavLink>
               )}
-              <NavLink to="/" className={navLinkStyles}>
-                Inicio
-              </NavLink>
-              <NavLink to="/catalogo" className={navLinkStyles}>Catalogo</NavLink>
-              <NavLink to="/nosotros" className={navLinkStyles}>Nosotros</NavLink>
-              <NavLink to="/administrador" className={navLinkStyles}>Administrador</NavLink>
-              <NavLink to="/login" className={navLinkStyles}>Login</NavLink>
+              
             </div>
           </div>
         </div>
-      </div>
-
-      {/* Navbar desplegable */}
+        {/* Navbar desplegable */}
       <div
         className={`${isNavbarOpen ? "max-h-96 " : "max-h-0 overflow-hidden"} md:hidden transition-all duration-300 ease-in-out bg-zinc-900 border-t border-zinc-800 `}
       >
@@ -204,6 +181,7 @@ const Navbar = () => {
 
           <NavLink to="/nosotros" className={navLinkStyles}>Nosotros</NavLink>
         </div>
+      </div>
       </div>
     </nav>
   );
