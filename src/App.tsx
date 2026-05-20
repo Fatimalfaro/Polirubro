@@ -58,6 +58,10 @@ useEffect(() => {
 
   }
 
+  const agregarAlCarrito = (producto: Producto) => {
+  setCarrito([...carrito, producto]);
+};
+
   return (
     <AppContext.Provider value={{ usuario, setUsuario, productos, crearProducto}}>
       <BrowserRouter>
