@@ -63,7 +63,7 @@ useEffect(() => {
 };
 
   return (
-    <AppContext.Provider value={{ usuario, setUsuario, productos, crearProducto}}>
+    <AppContext.Provider value={{ usuario, setUsuario, productos, crearProducto, carrito, agregarAlCarrito}}>
       <BrowserRouter>
         <Navbar></Navbar>
         <main>
