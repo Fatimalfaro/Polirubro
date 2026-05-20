@@ -12,6 +12,7 @@ import ProtectorRutas from "./components/routes/ProtectorRutas";
 import { useEffect, useState } from "react";
 import { AppContext } from "./context/AppContext";
 import type { Producto, ProductoFormData } from "./interfaces/productos";
+import DetalleProducto from "./components/pages/DetalleProducto";
 
 function App() {
  const usuarioSessionStorage = JSON.parse(
@@ -65,10 +66,10 @@ useEffect(() => {
     <AppContext.Provider value={{ usuario, setUsuario, productos, crearProducto, carrito, agregarAlCarrito}}>
       <BrowserRouter>
         <Navbar></Navbar>
-        <main>
+        <main className="grow">
           <Routes>
             <Route path="/" element={<Inicio />}></Route>
-            <Route path="/catalogo" element={<Catalogo />}></Route>
+            <Route path="/producto/:id" element={<DetalleProducto/>}></Route>
             <Route path="/administrador" element={<ProtectorRutas />}>
               <Route index element={<Administrador />}></Route>
               <Route
